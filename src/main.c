@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 09:03:32 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/05 16:06:44 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/05 16:23:48 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ void		print_hex(t_token *ttoken, char *fn)
 int			main(int ac, char **av)
 {
 	t_ass_env	ass;
+	int i;
 	
 	init_env(&ass);
 	if (ac > 1 && !assembler(av[1], &ass))
@@ -148,11 +149,13 @@ int			main(int ac, char **av)
 	t_token *ttoken;
 	ttoken = ass.tokens;
 	print_hex(ttoken, av[1]);
+	i = 0;
 	while (ttoken)
 	{
-		ft_printf("%s %d ", ttoken->name, ttoken->type);
+		ft_printf("%d\t%s %d ", i, ttoken->name, ttoken->type);
 		ft_putendl("");
 		ttoken = ttoken->next;
+		i++;
 	}
 	return (0);
 }
