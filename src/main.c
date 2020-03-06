@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 09:03:32 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/05 16:23:48 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/06 14:03:40 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void	init_env(t_ass_env *ass)
 	ass->champ.prog_cmnt = NULL;
 	ass->tokens = NULL;
 	ass->op = NULL;
+	ass->sz = 0;
 }
 
 char		*renamefn(char *s)
@@ -41,64 +42,8 @@ char		*renamefn(char *s)
 	return (fn);
 }
 
-void		print_magic_header(int fd, int *j)
+void		print_content(t_token *ttoken, char *fn, int *sz)
 {
-	int added;
-	char *s;
-	int i;
-
-	s = itoa_base(COREWAR_EXEC_MAGIC, 16);
-	added = 8 - ft_strlen(s);
-	i = -1;
-	while (++i < added)
-	{
-		ft_putstr_fd("0", fd);
-		if (((*j) + 1) % 4 == 0)
-			ft_putchar_fd(' ', fd);
-		(*j)++;
-	}
-	i = -1;
-	while (s[++i])
-	{
-		ft_putchar_fd(s[i], fd);
-		if (((*j) + 1) % 4 == 0)
-			ft_putchar_fd(' ', fd);
-		(*j)++;
-	}
-	(*j) /= 2;
-	ft_strdel(&s);
-}
-
-void		print_name_comnt(int fd, char *name, int *j, int max)
-{
-	int i;
-	int k;
-	
-	i = -1;
-	while (name[++i])
-	{
-		ft_putstr_fd(itoa_base(name[i], 16), fd);
-		if (((*j) + 1) % 2 == 0)
-			ft_putchar_fd(' ', fd);
-		if (((*j) + 1) % 16 == 0)
-			ft_putchar_fd('\n', fd);
-		(*j)++;
-	}
-	i--;
-	while (++i < max)
-	{
-		ft_putstr_fd("00", fd);
-		if (((*j) + 1) % 2 == 0)
-			ft_putchar_fd(' ', fd);
-		if (((*j) + 1) % 16 == 0)
-			ft_putchar_fd('\n', fd);
-		(*j) ++;
-	}
-}
-
-void		print_hex(t_token *ttoken, char *fn)
-{
-	int j;
 	int fd;
 	char	*nfn;
 	t_token	*tk;
@@ -111,22 +56,17 @@ void		print_hex(t_token *ttoken, char *fn)
 		return ;
 	}
 	ft_printf("Creating the file %s\n", nfn);
-	j = 0;
-	print_magic_header(fd, &j);
+	print_magic_header(fd,sz);
 	while (tk)
 	{
 		if (tk->type == 1)
-			print_name_comnt(fd, tk->name, &j, PROG_NAME_LENGTH);
+			print_name_comnt(fd, tk->name, PROG_NAME_LENGTH, sz);
 		if (tk->type == 2)
 		{
-			// ft_putstr_fd("0000 0000 ", fd);
-			ft_putstr_fd("nnnn nnnn ", fd);
-			ft_putstr_fd("xxxx xxxx ", fd); //print exec code size
-			j += 4;
-			j += 4;
-			print_name_comnt(fd, tk->name, &j, COMMENT_LENGTH);
-			ft_putstr_fd("nnnn nnnn ", fd);
-			j += 4;
+			print_null(fd, sz);
+			print_exec_code_size(fd, sz);
+			print_name_comnt(fd, tk->name, COMMENT_LENGTH, sz);
+			print_null(fd, sz);
 		}
 		tk = tk->next;
 	}
@@ -148,8 +88,11 @@ int			main(int ac, char **av)
 
 	t_token *ttoken;
 	ttoken = ass.tokens;
-	print_hex(ttoken, av[1]);
+	ass.sz = 0;
+	print_content(ttoken, av[1], &ass.sz);
+	ft_printf("\n%d", ass.sz);
 	i = 0;
+	ft_putendl("");
 	while (ttoken)
 	{
 		ft_printf("%d\t%s %d ", i, ttoken->name, ttoken->type);

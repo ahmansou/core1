@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 09:03:28 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/05 12:04:38 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/06 14:03:52 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ typedef struct		s_ass_env
 	struct s_op		*op;
 	t_lines			*lines;
 	t_token			*tokens;
+	int				sz;
+	int				exec_code_sz;
 	struct s_ch		champ;
 }					t_ass_env;
 
@@ -81,5 +83,12 @@ int					is_op(char *line);
 const t_op			*get_op_tab(void);
 int					get_op(char *line, t_ass_env *ass);
 void				free2d(char ***s);
+int					ft_atoi_base(char *nb, int base);
+
+void				print_magic_header(int fd, int *sz);
+void				print_name_comnt(int fd, char *name, int max, int *sz);
+void				print_null(int fd, int *sz);
+void				print_exec_code_size(int fd, int *sz);
+void				print_content(t_token *ttoken, char *fn, int *sz);
 
 #endif
