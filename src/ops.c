@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 11:51:00 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/06 15:30:52 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/07 15:36:33 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ t_token		*new_op_token(char **split, t_ass_env *ass)
 	const t_op	*ops;
 	t_token		*new;
 	int			i;
+	t_op_types	o_tps;
 	
+	o_tps = get_o_types();
 	ops = get_op_tab();
 	i = -1;
 	if (!split || !(new = ft_memalloc(sizeof(t_token))))
@@ -31,11 +33,16 @@ t_token		*new_op_token(char **split, t_ass_env *ass)
 	while (++i < 16)
 		if (!ft_strcmp(split[0], ops[i].name))
 		{
-			// ft_printf("+%s\n", split[0]);
 			new->type = 4;
 			new->name = strdup(split[0]);
+			new->code = ops[i].code;
+			new->tdir_sz = ops[i].tdir_sz;
+			if (new->code >= 1 && new->code <= 16)
+				if (!o_tps.t[new->code - 1](&new, split))
+					return (NULL);
 			return (new);
 		}
+	free2d(&split);
 	return (NULL);
 }
 

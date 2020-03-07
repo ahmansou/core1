@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 10:15:09 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/05 12:33:10 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/07 12:15:24 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_token		*new_token(char *line, int type)
 	{
 		new->type = type;
 		new->name = line;
-		new->args = NULL;
+		// new->args = NULL;
 		new->next = NULL;
 	}
 	return (new);

@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 09:03:32 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/06 14:03:40 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/07 17:09:56 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,33 +42,18 @@ char		*renamefn(char *s)
 	return (fn);
 }
 
-void		print_content(t_token *ttoken, char *fn, int *sz)
+void	find_prevs(t_token **token)
 {
-	int fd;
-	char	*nfn;
-	t_token	*tk;
-	
-	tk = ttoken;
-	nfn = renamefn(fn);
-	if ((fd = open(nfn, O_RDWR | O_CREAT, 0644)) < 0)
+	t_token *ttoken;
+	t_token *current;
+
+	ttoken = *token;
+	current = NULL;
+	while (ttoken)
 	{
-		ft_printf("no can do");
-		return ;
-	}
-	ft_printf("Creating the file %s\n", nfn);
-	print_magic_header(fd,sz);
-	while (tk)
-	{
-		if (tk->type == 1)
-			print_name_comnt(fd, tk->name, PROG_NAME_LENGTH, sz);
-		if (tk->type == 2)
-		{
-			print_null(fd, sz);
-			print_exec_code_size(fd, sz);
-			print_name_comnt(fd, tk->name, COMMENT_LENGTH, sz);
-			print_null(fd, sz);
-		}
-		tk = tk->next;
+		ttoken->prev = current;
+		current = ttoken;
+		ttoken = ttoken->next;
 	}
 }
 
@@ -89,16 +74,21 @@ int			main(int ac, char **av)
 	t_token *ttoken;
 	ttoken = ass.tokens;
 	ass.sz = 0;
-	print_content(ttoken, av[1], &ass.sz);
 	ft_printf("\n%d", ass.sz);
 	i = 0;
 	ft_putendl("");
+	find_prevs(&(ass.tokens));
 	while (ttoken)
 	{
-		ft_printf("%d\t%s %d ", i, ttoken->name, ttoken->type);
+		ft_printf("%d\t %d %s ", i, ttoken->type, ttoken->name);
+		if (ttoken->type == 4)
+			ft_printf("%#0x", ttoken->code);
+		if (ttoken->prev)
+			ft_printf("\t++ prev %s ", ttoken->prev->name);
 		ft_putendl("");
 		ttoken = ttoken->next;
 		i++;
 	}
+	print_content(ass.tokens, av[1], &ass.sz);
 	return (0);
 }
