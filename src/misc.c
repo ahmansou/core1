@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 09:14:05 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/07 14:26:44 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/08 11:41:36 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,4 +122,60 @@ int				is_num(char *s)
 		if (ft_isdigit(s[i]) == 0)
 			return (0);
 	return (1);
+}
+
+
+int	calc_sz(char *argc, int dirsz)
+{
+	int sz;
+
+	sz = 1;
+	if (argc[0] == T_REG)
+		sz += 1;
+	else if (argc[0] == T_DIR)
+		sz += dirsz;
+	else if (argc[0] == T_IND)
+		sz += 2;
+	if (argc[1] == T_REG)
+		sz += 1;
+	else if (argc[1] == T_DIR)
+		sz += dirsz;
+	else if (argc[1] == T_IND)
+		sz += 2;
+	if (argc[2] == T_REG)
+		sz += 1;
+	else if (argc[2] == T_DIR)
+		sz += dirsz;
+	else if (argc[2] == T_IND)
+		sz += 2;
+	return (sz);
+}
+
+
+void	get_argc_types(t_token **op, char **sp)
+{
+	if (sp[1] && sp[1][0] == 'r')
+		(*op)->argc[0] = T_REG;
+	else if (sp[1] && sp[1][0] == '%')
+		(*op)->argc[0] = T_DIR;
+	else if (sp[1] && is_num(sp[1]))
+		(*op)->argc[0] = T_IND;
+	else
+		(*op)->argc[0] = 0;
+	if (sp[2] && sp[2][0] == 'r')
+		(*op)->argc[1] = T_REG;
+	else if (sp[2] && sp[2][0] == '%')
+		(*op)->argc[1] = T_DIR;
+	else if (sp[2] && is_num(sp[2]))
+		(*op)->argc[1] = T_IND;
+	else
+		(*op)->argc[0] = 0;
+	if (sp[3] && sp[3][0] == 'r')
+		(*op)->argc[2] = T_REG;
+	else if (sp[3] && sp[3][0] == '%')
+		(*op)->argc[2] = T_DIR;
+	else if (sp[3] && is_num(sp[3]))
+		(*op)->argc[2] = T_IND;
+	else
+		(*op)->argc[0] = 0;
 }

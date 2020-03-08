@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 11:36:22 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/07 19:03:21 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/08 11:45:28 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void		print_exec_code(int fd, t_token *tk, int *sz)
 	while (ttoken)
 	{
 		if (ttoken->type == 4)
+		{
 			if (ttoken->code == 1)
 				print_live(ttoken, fd, sz);
 			if (ttoken->code == 2)
@@ -89,6 +90,9 @@ void		print_exec_code(int fd, t_token *tk, int *sz)
 				print_add_sub(ttoken, fd, sz);
 			if (ttoken->code == 11)
 				print_sti(ttoken, fd, sz);
+			if (ttoken->code == 6 || ttoken->code == 7 || ttoken->code == 8)
+				print_and_xor(ttoken, fd, sz);
+		}
 		ttoken = ttoken->next;
 	}
 }

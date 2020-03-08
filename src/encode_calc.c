@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 14:52:15 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/07 15:26:16 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/08 12:16:11 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	first_arg(char **bytes, char *arg, int i)
 		(*bytes)[i] = '1';
 		(*bytes)[i + 1] = '0';
 	}
-	else if (is_num(arg))
+	else if (is_num(arg) || arg[0] == ':')
 	{
 		(*bytes)[i] = '1';
 		(*bytes)[i + 1] = '1';

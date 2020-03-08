@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 09:03:28 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/07 18:43:05 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/08 11:44:11 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,9 +131,12 @@ void	print_live(t_token *token, int fd, int *sz);
 void	print_ld(t_token *token, int fd, int *sz);
 void	print_add_sub(t_token *token, int fd, int *sz);
 void	print_sti(t_token *token, int fd, int *sz);
+void	print_and_xor(t_token *token, int fd, int *sz);
 
 int				is_num(char *s);
 
 int		calc_encode(char *arg1, char *arg2, char *arg3);
+int		calc_sz(char *argc, int dirsz);
+void	get_argc_types(t_token **op, char **sp);
 
 #endif
