@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 09:03:28 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/08 11:44:11 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/09 16:07:12 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct 		s_token
 	int				is_encode;
 	int				encode;
 	int				sz;
+	char			*labels[3];
 	struct s_token	*prev;
 	struct s_token	*next;
 }					t_token;
@@ -87,10 +88,7 @@ int					_live(t_token **op, char **sp);
 int					_ld(t_token **op, char **sp);
 int					_st(t_token **op, char **sp);
 int					_add(t_token **op, char **sp);
-int					_sub(t_token **op, char **sp);
 int					_and(t_token **op, char **sp);
-int					_or(t_token **op, char **sp);
-int					_xor(t_token **op, char **sp);
 int					_zjmp(t_token **op, char **sp);
 int					_ldi(t_token **op, char **sp);
 int					_sti(t_token **op, char **sp);
@@ -99,6 +97,9 @@ int					_lld(t_token **op, char **sp);
 int					_lldi(t_token **op, char **sp);
 int					_lfork(t_token **op, char **sp);
 int					_aff(t_token **op, char **sp);
+
+
+void				fill_args(t_token **op, char **sp, int arg);
 
 int					assembler(char *fn, t_ass_env *ass);
 int 				get_lines(char *filename, t_ass_env *env);
@@ -129,9 +130,11 @@ char		*renamefn(char *s);
 
 void	print_live(t_token *token, int fd, int *sz);
 void	print_ld(t_token *token, int fd, int *sz);
+void	print_st(t_token *token, int fd, int *sz);
 void	print_add_sub(t_token *token, int fd, int *sz);
-void	print_sti(t_token *token, int fd, int *sz);
 void	print_and_xor(t_token *token, int fd, int *sz);
+void	print_sti(t_token *token, int fd, int *sz);
+void	print_ldi(t_token *token, int fd, int *sz);
 
 int				is_num(char *s);
 

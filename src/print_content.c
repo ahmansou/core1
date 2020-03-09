@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 11:36:22 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/08 11:45:28 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/09 16:16:02 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,17 @@ void		print_exec_code(int fd, t_token *tk, int *sz)
 	{
 		if (ttoken->type == 4)
 		{
-			if (ttoken->code == 1)
+			if (ttoken->code == 1 || ttoken->code == 9 ||
+				ttoken->code == 12 || ttoken->code == 15)
 				print_live(ttoken, fd, sz);
 			if (ttoken->code == 2)
 				print_ld(ttoken, fd, sz);
+			if (ttoken->code == 3)
+				print_st(ttoken, fd, sz);
 			if (ttoken->code == 4 || ttoken->code == 5)
 				print_add_sub(ttoken, fd, sz);
+			if (ttoken->code == 10)
+				print_ldi(ttoken, fd, sz);
 			if (ttoken->code == 11)
 				print_sti(ttoken, fd, sz);
 			if (ttoken->code == 6 || ttoken->code == 7 || ttoken->code == 8)

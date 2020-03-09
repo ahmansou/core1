@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 09:14:05 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/08 11:41:36 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/09 15:36:32 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ const t_op_types op_type =
 {
 	{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15},
 	// {0, 1, 2, 3, 4},
-	{&_live, &_ld, &_st, &_add, &_sub, &_and, &_or,
-		&_xor, &_zjmp, &_ldi, &_sti, &_fork, &_lld, &_lldi, &_lfork, &_aff}
+	{&_live, &_ld, &_st, &_add, &_add, &_and, &_and,
+		&_and, &_live, &_ldi, &_sti, &_live, &_lld, &_lldi, &_live, &_aff}
 };
 
 t_op_types get_o_types(void)
@@ -158,7 +158,7 @@ void	get_argc_types(t_token **op, char **sp)
 		(*op)->argc[0] = T_REG;
 	else if (sp[1] && sp[1][0] == '%')
 		(*op)->argc[0] = T_DIR;
-	else if (sp[1] && is_num(sp[1]))
+	else if (sp[1] && (is_num(sp[1]) || sp[1][0] == ':'))
 		(*op)->argc[0] = T_IND;
 	else
 		(*op)->argc[0] = 0;
@@ -166,7 +166,7 @@ void	get_argc_types(t_token **op, char **sp)
 		(*op)->argc[1] = T_REG;
 	else if (sp[2] && sp[2][0] == '%')
 		(*op)->argc[1] = T_DIR;
-	else if (sp[2] && is_num(sp[2]))
+	else if (sp[2] && (is_num(sp[2]) || sp[2][0] == ':'))
 		(*op)->argc[1] = T_IND;
 	else
 		(*op)->argc[0] = 0;
@@ -174,7 +174,7 @@ void	get_argc_types(t_token **op, char **sp)
 		(*op)->argc[2] = T_REG;
 	else if (sp[3] && sp[3][0] == '%')
 		(*op)->argc[2] = T_DIR;
-	else if (sp[3] && is_num(sp[3]))
+	else if (sp[3] && (is_num(sp[3]) || sp[3][0] == ':'))
 		(*op)->argc[2] = T_IND;
 	else
 		(*op)->argc[0] = 0;
