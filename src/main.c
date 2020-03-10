@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 09:03:32 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/07 17:09:56 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/10 15:38:12 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,27 +68,12 @@ int			main(int ac, char **av)
 		ft_printf("oh no");
 		return (0);
 	}
-	// ft_printf("name : |%s|\n", ass.champ.prog_name);
-	// ft_printf("desc : |%s|\n", ass.champ.prog_cmnt);
-
 	t_token *ttoken;
 	ttoken = ass.tokens;
 	ass.sz = 0;
-	ft_printf("\n%d", ass.sz);
 	i = 0;
-	ft_putendl("");
 	find_prevs(&(ass.tokens));
-	while (ttoken)
-	{
-		ft_printf("%d\t %d %s ", i, ttoken->type, ttoken->name);
-		if (ttoken->type == 4)
-			ft_printf("%#0x", ttoken->code);
-		if (ttoken->prev)
-			ft_printf("\t++ prev %s ", ttoken->prev->name);
-		ft_putendl("");
-		ttoken = ttoken->next;
-		i++;
-	}
-	print_content(ass.tokens, av[1], &ass.sz);
+	if (get_labels(&(ass.tokens)))
+		print_content(ass.tokens, av[1], ass.sz);
 	return (0);
 }

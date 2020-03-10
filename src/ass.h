@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 09:03:28 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/09 16:07:12 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/10 17:04:15 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,28 +118,33 @@ int					get_op(char *line, t_ass_env *ass);
 void				free2d(char ***s);
 int					ft_atoi_base(char *nb, int base);
 
-void				print_magic_header(int fd, int *sz);
-void				print_name_comnt(int fd, char *name, int max, int *sz);
-void				print_null(int fd, int *sz);
-void				print_exec_code_size(int fd, int *sz);
-void				print_content(t_token *ttoken, char *fn, int *sz);
-void				print_exec_code(int fd, t_token *tk, int *sz);
+void				print_magic_header(int fd);
+void				print_name_comnt(int fd, char *name, int max);
+void				print_null(int fd);
+void				print_exec_code_size(int fd, int sz);
+void				print_content(t_token *ttoken, char *fn, int sz);
+void				print_exec_code(int fd, t_token *tk);
 
 int					count_int(int n);
 char		*renamefn(char *s);
 
-void	print_live(t_token *token, int fd, int *sz);
-void	print_ld(t_token *token, int fd, int *sz);
-void	print_st(t_token *token, int fd, int *sz);
-void	print_add_sub(t_token *token, int fd, int *sz);
-void	print_and_xor(t_token *token, int fd, int *sz);
-void	print_sti(t_token *token, int fd, int *sz);
-void	print_ldi(t_token *token, int fd, int *sz);
+void	print_live(t_token *token, int fd);
+void	print_ld(t_token *token, int fd);
+void	print_st(t_token *token, int fd);
+void	print_add_sub(t_token *token, int fd);
+void	print_and_xor(t_token *token, int fd);
+void	print_sti(t_token *token, int fd);
+void	print_ldi(t_token *token, int fd);
 
 int				is_num(char *s);
+int				is_num_neg(char *s);
 
 int		calc_encode(char *arg1, char *arg2, char *arg3);
 int		calc_sz(char *argc, int dirsz);
+int		calc_exec_code_sz(t_token *token);
+
 void	get_argc_types(t_token **op, char **sp);
+
+int		get_labels(t_token **token);
 
 #endif

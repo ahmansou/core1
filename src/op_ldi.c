@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 16:05:34 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/09 16:17:12 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/10 14:51:04 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		_ldi(t_token **op, char **sp)
 {
 	if (!check_ldi_err(sp))
 		return (0);
-	ft_printf("sti %d | ", (*op)->code);
+	// ft_printf("sti %d | ", (*op)->code);
 	(*op)->encode = calc_encode(sp[1], sp[2], sp[3]);
 	get_argc_types(op, sp);
 	fill_args(op, sp, 0);
@@ -46,11 +46,11 @@ int		_ldi(t_token **op, char **sp)
 	fill_args(op, sp, 2);
 	get_argc_types(op, sp);
 	(*op)->sz = calc_sz((*op)->argc, (*op)->tdir_sz) + 1;
-	ft_printf("sz : %x ", (*op)->tdir_sz);
-	ft_printf("encode : %x ", (*op)->encode);
-	ft_printf("| arg1 : %x | arg2 : %x | arg3 : %x | sz : %d",
-				(*op)->args[0], (*op)->args[1], (*op)->args[2], (*op)->sz);
-	ft_putendl("\n--------------------");
+	// ft_printf("sz : %x ", (*op)->tdir_sz);
+	// ft_printf("encode : %x ", (*op)->encode);
+	// ft_printf("| arg1 : %x | arg2 : %x | arg3 : %x | sz : %d",
+	// 			(*op)->args[0], (*op)->args[1], (*op)->args[2], (*op)->sz);
+	// ft_putendl("\n--------------------");
 	return (1);
 }
 
@@ -66,22 +66,23 @@ static void	ldi_misc(char *s, t_token *token, int fd, int t)
 	maxi = (token->argc[t] == T_DIR && token->tdir_sz == 4) ? 8 : maxi;
 	max = ft_strlen(s);
 	i = (max % 2 != 0) ? 1 : 0;
-		while (i < maxi - max)
-		{
-			ft_putchar_fd(00, fd);
-			i += 2;
-		}
-	i = 0;
+	while (i < maxi - max)
+	{
+		ft_putchar_fd(00, fd);
+		i += 2;
+	}
+	maxi = (max > maxi) ? max - maxi : 0;
+	i = maxi;
 	while (i < ft_strlen(s))
 	{
-		a = (i == 0 && max % 2 != 0) ? ft_strsub(s, i, 1) : ft_strsub(s, i, 2);
+		a = (i == maxi && max % 2 != 0) ? ft_strsub(s, i, 1) : ft_strsub(s, i, 2);
 		ft_putchar_fd(ft_atoi_base(a, 16), fd);
 		ft_strdel(&a);
-		i += (i == 0 && max % 2 != 0) ? 1 : 2;
+		i += (i == maxi && max % 2 != 0) ? 1 : 2;
 	}
 }
 
-void	print_ldi(t_token *token, int fd, int *sz)
+void	print_ldi(t_token *token, int fd)
 {
 	char	*s;
 	char	*a;

@@ -6,7 +6,7 @@
 #    By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/25 14:48:59 by ahmansou          #+#    #+#              #
-#    Updated: 2020/03/09 16:05:28 by ahmansou         ###   ########.fr        #
+#    Updated: 2020/03/10 13:09:38 by ahmansou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRCS =  src/ass.c\
 		src/op_sti.c\
 		src/op_ldi.c\
 		src/op_lld.c\
+		src/op_aff.c\
 		src/atoi_base.c
 		# src/label.c\
 		# src/parser.c src/parser_misc.c\

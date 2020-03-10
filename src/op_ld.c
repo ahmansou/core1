@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 11:38:37 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/09 14:40:21 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/10 14:51:13 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static int		valid_ld(char **sp)
 	if (
 		!sp[0] || !sp[1] || !sp[2] ||
 		(sp[3] && sp[3][0] != ';' && sp[3][0] != '#') ||
-		(sp[1] && sp[1][0] != '%' && sp[1][0] != ':' && !is_num(sp[1])) ||
-		(sp[1] && sp[1][0] == '%' && sp[1][1] != ':' && !is_num(sp[1] + 1)) ||
+		(sp[1] && sp[1][0] != '%' && sp[1][0] != ':' && !is_num_neg(sp[1])) ||
+		(sp[1] && sp[1][0] == '%' && sp[1][1] != ':' && !is_num_neg(sp[1] + 1)) ||
 		(sp[2] && sp[2][0] != 'r' && sp[2][0] != 'R') ||
 		(sp[2] && (sp[2][0] == 'r' || sp[2][0] == 'R') && !is_num(sp[2] + 1))
 	)
@@ -28,7 +28,7 @@ static int		valid_ld(char **sp)
 
 int		_ld(t_token **op, char **sp)
 {	
-	ft_printf("%s %x ok\n", (*op)->name, (*op)->code);
+	// ft_printf("%s %x ok\n", (*op)->name, (*op)->code);
 	if (!valid_ld(sp))
 		return (0);
 	(*op)->encode = calc_encode(sp[1], sp[2], NULL);
@@ -71,17 +71,18 @@ static void	ld_misc(char *s, t_token *token, int fd, int t)
 		ft_putchar_fd(00, fd);
 		i += 2;
 	}
-	i = 0;
+	maxi = (max > maxi) ? max - maxi : 0;
+	i = maxi;
 	while (i < ft_strlen(s))
 	{
-		a = (i == 0 && max % 2 != 0) ? ft_strsub(s, i, 1) : ft_strsub(s, i, 2);
+		a = (i == maxi && max % 2 != 0) ? ft_strsub(s, i, 1) : ft_strsub(s, i, 2);
 		ft_putchar_fd(ft_atoi_base(a, 16), fd);
 		ft_strdel(&a);
-		i += (i == 0 && max % 2 != 0) ? 1 : 2;
+		i += (i == maxi && max % 2 != 0) ? 1 : 2;
 	}
 }
 
-void	print_ld(t_token *token, int fd, int *sz)
+void	print_ld(t_token *token, int fd)
 {
 	char	*s;
 	char	*a;

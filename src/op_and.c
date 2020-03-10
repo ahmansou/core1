@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 14:56:34 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/09 15:56:36 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/10 14:51:25 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ int		check_and_err(char **sp)
 		(sp[4] && sp[4][0] != ';' && sp[4][0] != '#') ||		
 		
 		(sp[1] && sp[1][0] != 'R' && sp[1][0] != 'r' && sp[1][0] != '%' &&
-		sp[1][0] != ':' && !is_num(sp[1])) ||
+		sp[1][0] != ':' && !is_num_neg(sp[1])) ||
 		(sp[1] && (sp[1][0] == 'r' || sp[1][0] == 'R') && !is_num(sp[1] + 1)) ||
-		(sp[1] && (sp[1][0] == '%' && sp[1][1] != ':') && !is_num(sp[1] + 1)) ||
+		(sp[1] && (sp[1][0] == '%' && sp[1][1] != ':') && !is_num_neg(sp[1] + 1)) ||
 
 		(sp[2] && sp[2][0] != 'R' && sp[2][0] != 'r' && sp[2][0] != '%' &&
 		sp[2][0] != ':' && !is_num(sp[2])) ||
 		(sp[2] && (sp[2][0] == 'r' || sp[2][0] == 'R') && !is_num(sp[2] + 1)) ||
-		(sp[2] && (sp[2][0] == '%' && sp[2][1] != ':') && !is_num(sp[2] + 1)) ||
+		(sp[2] && (sp[2][0] == '%' && sp[2][1] != ':') && !is_num_neg(sp[2] + 1)) ||
 		
 		(sp[3] && sp[3][0] != 'R' && sp[3][0] != 'r') ||
 		(sp[3] && (sp[3][0] == 'r' || sp[3][0] == 'R') && !is_num(sp[3] + 1))
@@ -57,7 +57,7 @@ void	fill_args(t_token **op, char **sp, int arg)
 
 int		_and(t_token **op, char **sp)
 {
-	ft_printf("%s %d ok\n", (*op)->name, (*op)->tdir_sz);
+	// ft_printf("%s %d ok\n", (*op)->name, (*op)->tdir_sz);
 	if (!check_and_err(sp))
 		return (0);
 	(*op)->encode = calc_encode(sp[1], sp[2], sp[3]);
@@ -86,17 +86,19 @@ void	and_misc(char *s, t_token *token, int fd, int t)
 			ft_putchar_fd(00, fd);
 			i += 2;
 		}
-	i = 0;
+	maxi = (max > maxi) ? max - maxi : 0;
+	i = maxi;
 	while (i < ft_strlen(s))
 	{
-		a = (i == 0 && max % 2 != 0) ? ft_strsub(s, i, 1) : ft_strsub(s, i, 2);
+		a = (i == maxi && max % 2 != 0) ?
+			ft_strsub(s, i, 1) : ft_strsub(s, i, 2);
 		ft_putchar_fd(ft_atoi_base(a, 16), fd);
 		ft_strdel(&a);
-		i += (i == 0 && max % 2 != 0) ? 1 : 2;
+		i += (i == maxi && max % 2 != 0) ? 1 : 2;
 	}
 }
 
-void	print_and_xor(t_token *token, int fd, int *sz)
+void	print_and_xor(t_token *token, int fd)
 {
 	char	*s;
 	char	*a;

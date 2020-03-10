@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 12:36:34 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/09 14:47:58 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/10 16:41:01 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		_add(t_token **op, char **sp)
 {		
-	ft_printf("%s %x ok\n", (*op)->name, (*op)->code);
+	// ft_printf("%s %x ok\n", (*op)->name, (*op)->code);
 	if (!sp[0] || !sp[1] || !sp[2] || !sp[3] ||
 		(sp[4] && sp[4][0] != ';' && sp[4][0] != '#') ||
 		((sp[1][0] != 'r') && (sp[1][0] != 'R')) ||
@@ -37,7 +37,7 @@ int		_add(t_token **op, char **sp)
 	return (1);
 }
 
-void	print_add_sub(t_token *token, int fd, int *sz)
+void	print_add_sub(t_token *token, int fd)
 {
 	char	*s;
 	char	*a;

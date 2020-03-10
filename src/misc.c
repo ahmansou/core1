@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 09:14:05 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/09 15:36:32 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/10 16:31:18 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ const t_op_types op_type =
 	{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15},
 	// {0, 1, 2, 3, 4},
 	{&_live, &_ld, &_st, &_add, &_add, &_and, &_and,
-		&_and, &_live, &_ldi, &_sti, &_live, &_lld, &_lldi, &_live, &_aff}
+		&_and, &_live, &_ldi, &_sti, &_live, &_ld, &_ldi, &_live, &_aff}
 };
 
 t_op_types get_o_types(void)
@@ -124,6 +124,19 @@ int				is_num(char *s)
 	return (1);
 }
 
+int				is_num_neg(char *s)
+{
+	int i;
+
+	i = -1;
+	if (s[0] == '-')
+		i++;
+	while (s[++i])
+		if (ft_isdigit(s[i]) == 0)
+			return (0);
+	return (1);
+}
+
 
 int	calc_sz(char *argc, int dirsz)
 {
@@ -136,12 +149,14 @@ int	calc_sz(char *argc, int dirsz)
 		sz += dirsz;
 	else if (argc[0] == T_IND)
 		sz += 2;
+	
 	if (argc[1] == T_REG)
 		sz += 1;
 	else if (argc[1] == T_DIR)
 		sz += dirsz;
 	else if (argc[1] == T_IND)
 		sz += 2;
+	
 	if (argc[2] == T_REG)
 		sz += 1;
 	else if (argc[2] == T_DIR)
@@ -158,24 +173,26 @@ void	get_argc_types(t_token **op, char **sp)
 		(*op)->argc[0] = T_REG;
 	else if (sp[1] && sp[1][0] == '%')
 		(*op)->argc[0] = T_DIR;
-	else if (sp[1] && (is_num(sp[1]) || sp[1][0] == ':'))
+	else if (sp[1] && (is_num_neg(sp[1]) || sp[1][0] == ':'))
 		(*op)->argc[0] = T_IND;
 	else
 		(*op)->argc[0] = 0;
+
 	if (sp[2] && sp[2][0] == 'r')
 		(*op)->argc[1] = T_REG;
 	else if (sp[2] && sp[2][0] == '%')
 		(*op)->argc[1] = T_DIR;
-	else if (sp[2] && (is_num(sp[2]) || sp[2][0] == ':'))
+	else if (sp[2] && (is_num_neg(sp[2]) || sp[2][0] == ':'))
 		(*op)->argc[1] = T_IND;
 	else
-		(*op)->argc[0] = 0;
+		(*op)->argc[1] = 0;
+		
 	if (sp[3] && sp[3][0] == 'r')
 		(*op)->argc[2] = T_REG;
 	else if (sp[3] && sp[3][0] == '%')
 		(*op)->argc[2] = T_DIR;
-	else if (sp[3] && (is_num(sp[3]) || sp[3][0] == ':'))
+	else if (sp[3] && (is_num_neg(sp[3]) || sp[3][0] == ':'))
 		(*op)->argc[2] = T_IND;
 	else
-		(*op)->argc[0] = 0;
+		(*op)->argc[2] = 0;
 }
