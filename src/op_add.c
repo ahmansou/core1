@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 12:36:34 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/10 16:41:01 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/11 15:19:18 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ int		_add(t_token **op, char **sp)
 	(*op)->args[0] = ft_atoi(sp[1] + 1);
 	(*op)->args[1] = ft_atoi(sp[2] + 1);
 	(*op)->args[2] = ft_atoi(sp[3] + 1);
-	if ((*op)->args[0] > REG_NUMBER || (*op)->args[0] < 0 ||
-		(*op)->args[1] > REG_NUMBER || (*op)->args[1] < 0 ||
-		(*op)->args[2] > REG_NUMBER || (*op)->args[2] < 0)
+	if ((*op)->args[0] > REG_NUMBER || (*op)->args[0] <= 0 ||
+		(*op)->args[1] > REG_NUMBER || (*op)->args[1] <= 0 ||
+		(*op)->args[2] > REG_NUMBER || (*op)->args[2] <= 0)
 		return (0);
 	get_argc_types(op, sp);
 	(*op)->sz = calc_sz((*op)->argc, (*op)->tdir_sz) + 1;

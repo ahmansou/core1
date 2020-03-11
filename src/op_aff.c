@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 13:09:25 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/10 16:48:31 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/11 15:19:45 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,17 @@
 
 int		_aff(t_token **op, char **sp)
 {
-	if (
-		!sp[0] || !sp[1] ||
+	if (!sp[0] || !sp[1] ||
 		(sp[2] && sp[2][0] != ';' && sp[2][0] != '#') ||
 		(sp[1][0] != 'r' && sp[1][0] != 'R') ||
-		(sp[1] && (sp[1][0] == 'r' || sp[1][0] == 'R') && !is_num(sp[1] + 1))
-		)
+		(sp[1] && (sp[1][0] == 'r' || sp[1][0] == 'R') && !is_num(sp[1] + 1)))
 		return (0);
 	(*op)->encode = calc_encode(sp[1], NULL, NULL);
 	(*op)->args[0] = ft_atoi(sp[1] + 1);
-	if ((*op)->args[0] > REG_NUMBER || (*op)->args[0] < 0)
+	if ((*op)->args[0] > REG_NUMBER || (*op)->args[0] <= 0)
 		return (0);
-	// get_argc_types(op, sp);
-	ft_printf("ok1\n");
 	(*op)->argc[0] = T_REG;
-	ft_printf("ok2\n");
 	(*op)->sz = 3;
-	ft_printf("ok3\n");
-	// (*op)->sz = calc_sz((*op)->argc, (*op)->tdir_sz) + 1;
 	return (1);
 }
 

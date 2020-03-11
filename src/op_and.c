@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 14:56:34 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/10 14:51:25 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/11 20:22:55 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,22 @@ void	fill_args(t_token **op, char **sp, int arg)
 
 int		_and(t_token **op, char **sp)
 {
-	// ft_printf("%s %d ok\n", (*op)->name, (*op)->tdir_sz);
 	if (!check_and_err(sp))
 		return (0);
 	(*op)->encode = calc_encode(sp[1], sp[2], sp[3]);
 	get_argc_types(op, sp);
 	fill_args(op, sp, 0);
 	fill_args(op, sp, 1);
+	fill_args(op, sp, 2);
+	if (
+		((*op)->argc[0] == T_REG &&
+		((*op)->args[0] > REG_NUMBER || (*op)->args[0] <= 0)) ||
+		((*op)->argc[1] == T_REG &&
+		((*op)->args[1] > REG_NUMBER || (*op)->args[1] <= 0)) ||
+		((*op)->argc[2] == T_REG &&
+		((*op)->args[2] > REG_NUMBER || (*op)->args[2] <= 0))
+		)
+		return (0);
 	(*op)->args[2] = ft_atoi(sp[3] + 1);
 	(*op)->sz = calc_sz((*op)->argc, (*op)->tdir_sz) + 1;
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 10:33:46 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/10 15:24:42 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/11 13:05:43 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,14 @@ void	print_exec_code_size(int fd, int sz)
 
 	maxi = 8;
 	s = itoa_base(sz, 16);
-	ft_printf("\n{%s}", s);
 	max = ft_strlen(s);
+	ft_printf("\n{%s:%d}", s, max);
 	i = (max % 2 != 0) ? 1 : 0;
 	while (i < maxi - max)
 	{
 		ft_putchar_fd(00, fd);
+		ft_putchar_fd('0', 1);
+		ft_putchar_fd('0', 1);
 		i += 2;
 	}
 	i = 0;
@@ -53,7 +55,7 @@ void	print_exec_code_size(int fd, int sz)
 		ft_putchar_fd(ft_atoi_base(a, 16), fd);
 		ft_printf("%s", a);
 		ft_strdel(&a);
-		i += (i == 0 && max % 2 != 0) ? maxi + 1 : 2;
+		i += (i == 0 && max % 2 != 0) ? 1 : 2;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 09:03:32 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/10 15:38:12 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/11 20:21:59 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,15 @@ char		*renamefn(char *s)
 	if (!(fn = ft_strnew(ft_strlen(s) + 2)))
 		return (NULL);
 	fn = ft_strncpy(fn, s, ft_strlen(s) - 2);
-	while (s[i] && s[i] != '.')
+	// while (s[i] && s[i] != '.' && s[i + 1] != 's')
+	// {
+	// 	fn[i] = s[i];
+	// 	i++;
+	// }
+	while (s[i])
 	{
+		if (s[i] == '.' && s[i + 1] && s[i + 1] == 's')
+			break ;
 		fn[i] = s[i];
 		i++;
 	}

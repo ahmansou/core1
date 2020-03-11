@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 16:05:34 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/10 14:51:04 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/11 15:20:11 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ static int		check_ldi_err(char **sp)
 		(sp[4] && sp[4][0] != ';' && sp[4][0] != '#') ||		
 		
 		(sp[1] && sp[1][0] != 'R' && sp[1][0] != 'r' && sp[1][0] != '%' &&
-		sp[1][0] != ':' && !is_num(sp[1])) ||
+		sp[1][0] != ':' && !is_num_neg(sp[1])) ||
 		(sp[1] && (sp[1][0] == 'r' || sp[1][0] == 'R') && !is_num(sp[1] + 1)) ||
-		(sp[1] && (sp[1][0] == '%' && sp[1][1] != ':') && !is_num(sp[1] + 1)) ||
+		(sp[1] && (sp[1][0] == '%' && sp[1][1] != ':') && !is_num_neg(sp[1] + 1)) ||
 		
 		(sp[2] && sp[2][0] != 'R' && sp[2][0] != 'r' && sp[2][0] != '%') ||
 		(sp[2] && (sp[2][0] == 'r' || sp[2][0] == 'R') && !is_num(sp[2] + 1)) ||
-		(sp[2] && (sp[2][0] == '%' && sp[2][1] != ':') && !is_num(sp[2] + 1)) ||
+		(sp[2] && (sp[2][0] == '%' && sp[2][1] != ':') && !is_num_neg(sp[2] + 1)) ||
 		
 		(sp[3] && sp[3][0] != 'R' && sp[3][0] != 'r') ||
 		(sp[3] && (sp[3][0] == 'r' || sp[3][0] == 'R') && !is_num(sp[3] + 1))
@@ -38,19 +38,21 @@ int		_ldi(t_token **op, char **sp)
 {
 	if (!check_ldi_err(sp))
 		return (0);
-	// ft_printf("sti %d | ", (*op)->code);
 	(*op)->encode = calc_encode(sp[1], sp[2], sp[3]);
 	get_argc_types(op, sp);
 	fill_args(op, sp, 0);
 	fill_args(op, sp, 1);
 	fill_args(op, sp, 2);
-	get_argc_types(op, sp);
+	if (
+		((*op)->argc[0] == T_REG &&
+		((*op)->args[0] > REG_NUMBER || (*op)->args[0] <= 0)) ||
+		((*op)->argc[1] == T_REG &&
+		((*op)->args[1] > REG_NUMBER || (*op)->args[1] <= 0)) ||
+		((*op)->argc[2] == T_REG &&
+		((*op)->args[2] > REG_NUMBER || (*op)->args[2] <= 0))
+		)
+		return (0);
 	(*op)->sz = calc_sz((*op)->argc, (*op)->tdir_sz) + 1;
-	// ft_printf("sz : %x ", (*op)->tdir_sz);
-	// ft_printf("encode : %x ", (*op)->encode);
-	// ft_printf("| arg1 : %x | arg2 : %x | arg3 : %x | sz : %d",
-	// 			(*op)->args[0], (*op)->args[1], (*op)->args[2], (*op)->sz);
-	// ft_putendl("\n--------------------");
 	return (1);
 }
 

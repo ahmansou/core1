@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 11:51:00 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/10 16:37:13 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/11 20:15:19 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_token		*new_op_token(char **split, t_ass_env *ass)
 			new->name = strdup(split[0]);
 			new->code = ops[i].code;
 			new->tdir_sz = ops[i].tdir_sz;
-			ft_printf("%s\n", new->name);
+			// ft_printf("%s\n", new->name);
 			init_labels(&new);
 			if (new->code >= 1 && new->code <= 16)
 				if (!o_tps.t[new->code - 1](&new, split))

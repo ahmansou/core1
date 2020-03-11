@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 11:38:37 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/10 14:51:13 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/11 15:20:04 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ static int		valid_ld(char **sp)
 }
 
 int		_ld(t_token **op, char **sp)
-{	
-	// ft_printf("%s %x ok\n", (*op)->name, (*op)->code);
+{
 	if (!valid_ld(sp))
 		return (0);
 	(*op)->encode = calc_encode(sp[1], sp[2], NULL);
@@ -50,7 +49,7 @@ int		_ld(t_token **op, char **sp)
 	(*op)->argc[1] = T_REG;
 	(*op)->argc[2] = 0;
 	(*op)->args[1] = ft_atoi(sp[2] + 1);
-	if ((*op)->args[1] > REG_NUMBER || (*op)->args[1] < 0)
+	if ((*op)->args[1] > REG_NUMBER || (*op)->args[1] <= 0)
 		return (0);
 	(*op)->sz = (sp[1][0] == '%') ? 7 : 5;
 	return (1);
@@ -91,11 +90,9 @@ void	print_ld(t_token *token, int fd)
 
 	s = itoa_base(token->code, 16);
 	ft_putchar_fd(ft_atoi_base(s, 16), fd);
-	ft_putchar_fd(' ', 1);
 	ft_strdel(&s);
 	s = itoa_base(token->encode, 16);
 	ft_putchar_fd(ft_atoi_base(s, 16), fd);
-	ft_putchar_fd(' ', 1);
 	ft_strdel(&s);
 	s = itoa_base(token->args[0], 16);
 	ld_misc(s, token, fd, 0);
