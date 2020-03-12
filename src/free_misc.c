@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 11:39:36 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/12 12:28:06 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/12 14:11:36 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,11 @@ void	free_lines(t_lines **lines)
 	while (tmp)
 	{
 		tline = tmp->next;
-		ft_strdel(&tmp->line);
-		free(tmp);
+		if (tmp)
+		{
+			ft_strdel(&tmp->line);
+			free(tmp);
+		}
 		tmp = tline;
 	}
 }
@@ -37,12 +40,15 @@ void	free_token(t_token **token)
 	while (ttoken)
 	{
 		tmp = ttoken->next;
-		i = 0;
-		while (i < 3)
-			ft_strdel(&ttoken->labels[i++]);
-		ft_strdel(&ttoken->name);
-		free(ttoken);
-		ttoken = tmp;
+		if (ttoken)
+		{
+			i = 0;
+			while (i < 3)
+				ft_strdel(&ttoken->labels[i++]);
+			ft_strdel(&ttoken->name);
+			free(ttoken);
+			ttoken = tmp;
+		}
 	}
 }
 

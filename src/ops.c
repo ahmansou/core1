@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 11:51:00 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/12 11:54:18 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/12 14:44:11 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,16 @@ static int	return_err(char ***split, int ret)
 	return (ret);
 }
 
-void		init_labels(t_token **token)
+int		init_labels(t_token **token, char *sp, t_op ops)
 {
 	(*token)->labels[0] = NULL;
 	(*token)->labels[1] = NULL;
 	(*token)->labels[2] = NULL;
+	(*token)->type = 4;
+	(*token)->name = strdup(sp);
+	(*token)->code = ops.code;
+	(*token)->tdir_sz = ops.tdir_sz;
+	return (1);
 }
 
 t_token		*new_op_token(char **split, t_ass_env *ass)
@@ -39,22 +44,18 @@ t_token		*new_op_token(char **split, t_ass_env *ass)
 		return (NULL);
 	while (++i < 16)
 	{
-		if (!split[0])
-			return (NULL);
 		if (!ft_strcmp(split[0], ops[i].name))
 		{
-			new->type = 4;
-			new->name = strdup(split[0]);
-			new->code = ops[i].code;
-			new->tdir_sz = ops[i].tdir_sz;
-			init_labels(&new);
-			if (new->code >= 1 && new->code <= 16)
-				if (!o_tps.t[new->code - 1](&new, split))
-					return (NULL);
+			init_labels(&new, split[0], ops[i]);
+			if (!o_tps.t[new->code - 1](&new, split))
+			{
+				ft_strdel(&(new->name));
+				free(new);
+				return (NULL);
+			}
 			return (new);
 		}
 	}
-	free2d(&split);
 	return (NULL);
 }
 

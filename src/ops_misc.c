@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 10:33:46 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/12 12:00:59 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/12 14:36:35 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,8 @@ int		get_labels(t_token **token)
 					if (!look_backwards(ttoken, ttoken->labels[i], i) &&
 						!look_forewards(ttoken, ttoken->labels[i], i))
 						{
-							ft_printf("ERROR : Label %s Not Found", ttoken->labels[i]);
+							ft_printf("ERROR : Label [%s] Not Found",
+								ttoken->labels[i]);
 							return (0);
 						}
 				}

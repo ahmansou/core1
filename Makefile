@@ -6,7 +6,7 @@
 #    By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/25 14:48:59 by ahmansou          #+#    #+#              #
-#    Updated: 2020/03/10 13:09:38 by ahmansou         ###   ########.fr        #
+#    Updated: 2020/03/12 11:40:29 by ahmansou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ NAME = ass
 SRCS =  src/ass.c\
 		src/get_next_line.c\
 		src/main.c\
+		src/free_misc.c\
 		src/champ_misc.c\
 		src/ft_split_whitespaces.c\
 		src/tokens.c\
@@ -34,8 +35,6 @@ SRCS =  src/ass.c\
 		src/op_lld.c\
 		src/op_aff.c\
 		src/atoi_base.c
-		# src/label.c\
-		# src/parser.c src/parser_misc.c\
 
 OBJS = $(SRCS:.c=.o) 
 

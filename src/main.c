@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 09:03:32 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/12 12:28:33 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/12 14:15:33 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int			main(int ac, char **av)
 	init_env(&ass);
 	if (ac > 1 && !assembler(av[1], &ass))
 	{
-		ft_printf("oh no");
+		ft_printf("ERROR\n");
 		free_lines(&(ass.lines));
 		free_token(&(ass.tokens));
 		return (0);
@@ -81,6 +81,5 @@ int			main(int ac, char **av)
 		print_content(ass.tokens, av[1], ass.sz);
 	free_lines(&(ass.lines));
 	free_token(&(ass.tokens));
-	// free_name_cmnt(&(ass.champ));
 	return (0);
 }
