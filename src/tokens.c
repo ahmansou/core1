@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 10:15:09 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/11 15:21:17 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/12 15:32:41 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ t_token		*new_token(char *line, int type)
 	{
 		new->type = type;
 		new->name = line;
-		// new->args = NULL;
 		new->next = NULL;
 	}
 	return (new);
@@ -32,7 +31,6 @@ int			add_token(t_ass_env *ass, t_token *new)
 {
 	t_token *ttoken;
 
-	// ft_printf("-%s\n", new->name);
 	if (!new)
 		return (0);
 	if (!ass->tokens)

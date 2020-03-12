@@ -6,27 +6,26 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 11:38:37 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/11 15:20:04 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/12 15:38:49 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ass.h"
 
-static int		valid_ld(char **sp)
+static int	valid_ld(char **sp)
 {
-	if (
-		!sp[0] || !sp[1] || !sp[2] ||
+	if (!sp[0] || !sp[1] || !sp[2] ||
 		(sp[3] && sp[3][0] != ';' && sp[3][0] != '#') ||
 		(sp[1] && sp[1][0] != '%' && sp[1][0] != ':' && !is_num_neg(sp[1])) ||
-		(sp[1] && sp[1][0] == '%' && sp[1][1] != ':' && !is_num_neg(sp[1] + 1)) ||
+		(sp[1] && sp[1][0] == '%' && sp[1][1] != ':' &&
+		!is_num_neg(sp[1] + 1)) ||
 		(sp[2] && sp[2][0] != 'r' && sp[2][0] != 'R') ||
-		(sp[2] && (sp[2][0] == 'r' || sp[2][0] == 'R') && !is_num(sp[2] + 1))
-	)
+		(sp[2] && (sp[2][0] == 'r' || sp[2][0] == 'R') && !is_num(sp[2] + 1)))
 		return (0);
 	return (1);
 }
 
-int		_ld(t_token **op, char **sp)
+int			o_ld(t_token **op, char **sp)
 {
 	if (!valid_ld(sp))
 		return (0);
@@ -57,10 +56,10 @@ int		_ld(t_token **op, char **sp)
 
 static void	ld_misc(char *s, t_token *token, int fd, int t)
 {
-	int i;
-	int	max;
+	int		i;
+	int		max;
+	int		maxi;
 	char	*a;
-	int	maxi;
 
 	maxi = (token->argc[t] == T_DIR) ? 8 : 4;
 	max = ft_strlen(s);
@@ -72,21 +71,19 @@ static void	ld_misc(char *s, t_token *token, int fd, int t)
 	}
 	maxi = (max > maxi) ? max - maxi : 0;
 	i = maxi;
-	while (i < ft_strlen(s))
+	while (i < (int)ft_strlen(s))
 	{
-		a = (i == maxi && max % 2 != 0) ? ft_strsub(s, i, 1) : ft_strsub(s, i, 2);
+		a = (i == maxi && max % 2 != 0) ?
+			ft_strsub(s, i, 1) : ft_strsub(s, i, 2);
 		ft_putchar_fd(ft_atoi_base(a, 16), fd);
 		ft_strdel(&a);
 		i += (i == maxi && max % 2 != 0) ? 1 : 2;
 	}
 }
 
-void	print_ld(t_token *token, int fd)
+void		print_ld(t_token *token, int fd)
 {
 	char	*s;
-	char	*a;
-	int i;
-	int	max;
 
 	s = itoa_base(token->code, 16);
 	ft_putchar_fd(ft_atoi_base(s, 16), fd);

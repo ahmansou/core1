@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 10:33:46 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/12 14:36:35 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/12 15:36:36 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,15 @@ int		calc_exec_code_sz(t_token *token)
 
 int		print_exec_code_size(int fd, int sz)
 {
-	int i;
-	int	max;
+	int		i;
+	int		max;
 	char	*a;
 	char	*s;
-	int	maxi;
+	int		maxi;
 
 	maxi = 8;
 	s = itoa_base(sz, 16);
 	max = ft_strlen(s);
-	ft_printf("\n{%s:%d}", s, max);
 	i = (max % 2 != 0) ? 1 : 0;
 	while (i < maxi - max)
 	{
@@ -47,7 +46,7 @@ int		print_exec_code_size(int fd, int sz)
 		i += 2;
 	}
 	i = 0;
-	while (i < ft_strlen(s))
+	while (i < (int)ft_strlen(s))
 	{
 		a = (i == 0 && max % 2 != 0) ? ft_strsub(s, i, 1) : ft_strsub(s, i, 2);
 		ft_putchar_fd(ft_atoi_base(a, 16), fd);
@@ -74,7 +73,7 @@ int		look_forewards(t_token *token, char *label, int i)
 		if (ttoken && ttoken->type == 3 && !ft_strcmp(ttoken->name, label))
 		{
 			token->args[i] = byte;
-			return(1);
+			return (1);
 		}
 		ttoken = ttoken->next;
 	}
@@ -97,7 +96,7 @@ int		look_backwards(t_token *token, char *label, int i)
 		if (ttoken && ttoken->type == 3 && !ft_strcmp(ttoken->name, label))
 		{
 			token->args[i] = -1 * byte;
-			return(1);
+			return (1);
 		}
 		ttoken = ttoken->prev;
 	}
@@ -107,7 +106,7 @@ int		look_backwards(t_token *token, char *label, int i)
 int		get_labels(t_token **token)
 {
 	t_token	*ttoken;
-	int i;
+	int		i;
 
 	ttoken = *token;
 	while (ttoken)
@@ -120,11 +119,11 @@ int		get_labels(t_token **token)
 				{
 					if (!look_backwards(ttoken, ttoken->labels[i], i) &&
 						!look_forewards(ttoken, ttoken->labels[i], i))
-						{
-							ft_printf("ERROR : Label [%s] Not Found",
-								ttoken->labels[i]);
-							return (0);
-						}
+					{
+						ft_printf("ERROR : Label [%s] Not Found",
+							ttoken->labels[i]);
+						return (0);
+					}
 				}
 		}
 		ttoken = ttoken->next;

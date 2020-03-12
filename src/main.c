@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 09:03:32 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/12 14:15:33 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/12 14:59:25 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	init_env(t_ass_env *ass)
 
 char		*renamefn(char *s)
 {
-	int i;
+	int		i;
 	char	*fn;
 
 	i = 0;
@@ -44,9 +44,9 @@ char		*renamefn(char *s)
 	return (fn);
 }
 
-void	find_prevs(t_token **token)
+void		find_prevs(t_token **token)
 {
-	t_token *ttoken;
+	t_token	*ttoken;
 	t_token *current;
 
 	ttoken = *token;
@@ -62,8 +62,8 @@ void	find_prevs(t_token **token)
 int			main(int ac, char **av)
 {
 	t_ass_env	ass;
-	int i;
-	
+	int			i;
+
 	init_env(&ass);
 	if (ac > 1 && !assembler(av[1], &ass))
 	{
@@ -72,8 +72,6 @@ int			main(int ac, char **av)
 		free_token(&(ass.tokens));
 		return (0);
 	}
-	t_token *ttoken;
-	ttoken = ass.tokens;
 	ass.sz = 0;
 	i = 0;
 	find_prevs(&(ass.tokens));

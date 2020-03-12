@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 09:34:28 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/12 12:26:44 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/12 15:00:29 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		parser(t_lines **line, t_ass_env *ass)
 {
-	int l;
+	int		l;
 	char	*tmp;
 
 	if (!ft_strncmp((*line)->line, NAME_CMD_STRING, 5))
@@ -26,7 +26,7 @@ int		parser(t_lines **line, t_ass_env *ass)
 		if ((l = is_label((*line)->line)) > 0)
 			if (!get_label((*line)->line, ass, l))
 				return (0);
-		return(get_op((*line)->line, ass));
+		return (get_op((*line)->line, ass));
 	}
 	else if ((l = is_label((*line)->line)) > 0)
 	{
@@ -53,9 +53,9 @@ int		check_name_cmnt(t_ass_env *ass)
 			continue ;
 		}
 		if (!ft_strncmp(tline->line, NAME_CMD_STRING, 5))
-			found++;	
+			found++;
 		else if (!ft_strncmp(tline->line, COMMENT_CMD_STRING, 8))
-			found++;	
+			found++;
 		if (is_label(tline->line) || is_op(tline->line))
 			break ;
 		tline = tline->next;
@@ -67,7 +67,7 @@ int		assembler(char *fn, t_ass_env *ass)
 {
 	t_lines *tline;
 	char	*tchar;
-	 
+
 	if (!get_lines(fn, ass))
 		return (0);
 	if (check_name_cmnt(ass) != 2)
@@ -81,7 +81,6 @@ int		assembler(char *fn, t_ass_env *ass)
 			tline = tline->next;
 			continue ;
 		}
-		// ft_printf("%s\n", tline->line);
 		if (!parser(&tline, ass))
 			return (0);
 		tline = tline->next;

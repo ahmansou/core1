@@ -6,23 +6,25 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 12:36:34 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/11 15:19:18 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/12 15:39:33 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ass.h"
 
-int		_add(t_token **op, char **sp)
-{		
-	// ft_printf("%s %x ok\n", (*op)->name, (*op)->code);
+int		o_add(t_token **op, char **sp)
+{
 	if (!sp[0] || !sp[1] || !sp[2] || !sp[3] ||
 		(sp[4] && sp[4][0] != ';' && sp[4][0] != '#') ||
 		((sp[1][0] != 'r') && (sp[1][0] != 'R')) ||
 		((sp[2][0] != 'r') && (sp[2][0] != 'R')) ||
 		((sp[3][0] != 'r') && (sp[3][0] != 'R')) ||
-		(sp[1] && ((sp[1][0] == 'r') || (sp[1][0] == 'R')) && !is_num(sp[1] + 1)) ||
-		(sp[2] && ((sp[2][0] == 'r') || (sp[2][0] == 'R')) && !is_num(sp[2] + 1)) ||
-		(sp[3] && ((sp[3][0] == 'r') || (sp[3][0] == 'R')) && !is_num(sp[3] + 1)))
+		(sp[1] && ((sp[1][0] == 'r') || (sp[1][0] == 'R')) &&
+		!is_num(sp[1] + 1)) ||
+		(sp[2] && ((sp[2][0] == 'r') || (sp[2][0] == 'R')) &&
+		!is_num(sp[2] + 1)) ||
+		(sp[3] && ((sp[3][0] == 'r') || (sp[3][0] == 'R')) &&
+		!is_num(sp[3] + 1)))
 		return (0);
 	(*op)->encode = calc_encode(sp[1], sp[2], sp[3]);
 	(*op)->args[0] = ft_atoi(sp[1] + 1);
@@ -40,9 +42,6 @@ int		_add(t_token **op, char **sp)
 void	print_add_sub(t_token *token, int fd)
 {
 	char	*s;
-	char	*a;
-	int i;
-	int	max;
 
 	s = itoa_base(token->code, 16);
 	ft_putchar_fd(ft_atoi_base(s, 16), fd);

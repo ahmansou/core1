@@ -6,13 +6,13 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 13:09:25 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/11 15:19:45 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/12 15:41:16 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ass.h"
 
-int		_aff(t_token **op, char **sp)
+int		o_aff(t_token **op, char **sp)
 {
 	if (!sp[0] || !sp[1] ||
 		(sp[2] && sp[2][0] != ';' && sp[2][0] != '#') ||
@@ -31,9 +31,6 @@ int		_aff(t_token **op, char **sp)
 void	print_aff(t_token *token, int fd)
 {
 	char	*s;
-	char	*a;
-	int i;
-	int	max;
 
 	s = itoa_base(token->code, 16);
 	ft_putchar_fd(ft_atoi_base(s, 16), fd);

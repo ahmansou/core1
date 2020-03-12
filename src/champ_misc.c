@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 09:51:41 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/12 12:27:45 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/12 15:01:14 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		get_champ_name(char *line, t_ass_env *ass)
 {
 	char	*tmp;
-	
+
 	line = ft_strtrim(line);
 	tmp = line;
 	if (!line || line[0] != '"' || line[ft_strlen(line) - 1] != '"')
@@ -42,7 +42,7 @@ int		get_champ_name(char *line, t_ass_env *ass)
 int		get_champ_cmnt(char *line, t_ass_env *ass)
 {
 	char	*tmp;
-	
+
 	line = ft_strtrim(line);
 	tmp = line;
 	if (!line || line[0] != '"' || line[ft_strlen(line) - 1] != '"')
@@ -79,9 +79,7 @@ int		is_label_char(char c)
 
 int		get_label(char *line, t_ass_env *ass, int l)
 {
-	// ft_printf("%s:\n", ft_strsub(line, 0, l));
 	if (!add_token(ass, new_token(ft_strsub(line, 0, l), 3)))
 		return (0);
 	return (1);
 }
-

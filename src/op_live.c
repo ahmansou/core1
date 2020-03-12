@@ -6,13 +6,13 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 12:25:37 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/11 15:20:17 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/12 15:38:24 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ass.h"
 
-int		_live(t_token **op, char **sp)
+int			o_live(t_token **op, char **sp)
 {
 	if (!sp[0] || !sp[1] ||
 		(sp[2] && sp[2][0] != ';' && sp[2][0] != '#') ||
@@ -33,12 +33,12 @@ int		_live(t_token **op, char **sp)
 	return (1);
 }
 
-static void	live_misc(char *s, t_token *token, int fd, int t)
+static void	live_misc(char *s, t_token *token, int fd)
 {
-	int i;
-	int	max;
+	int		i;
+	int		max;
 	char	*a;
-	int	maxi;
+	int		maxi;
 
 	maxi = token->tdir_sz * 2;
 	max = ft_strlen(s);
@@ -50,7 +50,7 @@ static void	live_misc(char *s, t_token *token, int fd, int t)
 	}
 	maxi = (max > maxi) ? max - maxi : 0;
 	i = maxi;
-	while (i < ft_strlen(s))
+	while (i < (int)ft_strlen(s))
 	{
 		a = (i == maxi && max % 2 != 0) ?
 			ft_strsub(s, i, 1) : ft_strsub(s, i, 2);
@@ -60,17 +60,14 @@ static void	live_misc(char *s, t_token *token, int fd, int t)
 	}
 }
 
-void	print_live(t_token *token, int fd)
+void		print_live(t_token *token, int fd)
 {
 	char	*s;
-	char	*a;
-	int i;
-	int	max;
 
 	s = itoa_base(token->code, 16);
 	ft_putchar_fd(ft_atoi_base(s, 16), fd);
 	ft_strdel(&s);
 	s = itoa_base(token->args[0], 16);
-	live_misc(s, token, fd, 0);
+	live_misc(s, token, fd);
 	ft_strdel(&s);
 }

@@ -6,13 +6,13 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 10:16:07 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/06 11:14:28 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/12 15:00:45 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ass.h"
 
-static int		ft_power(int nb, int power)
+static int	ft_power(int nb, int power)
 {
 	if (power == 0)
 		return (1);

@@ -6,13 +6,13 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 09:14:05 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/11 15:26:09 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/12 15:15:05 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ass.h"
 
-t_op    op_tab[17] =
+t_op		g_op_tab[17] =
 {
 	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0, 4},
 	{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0, 4},
@@ -41,37 +41,33 @@ t_op    op_tab[17] =
 
 const t_op	*get_op_tab(void)
 {
-	return (op_tab);
+	return (g_op_tab);
 }
 
-const t_op_types op_type = 
+const t_op_types	g_op_type =
 {
 	{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15},
-	// {0, 1, 2, 3, 4},
-	{&_live, &_ld, &_st, &_add, &_add, &_and, &_and,
-		&_and, &_live, &_ldi, &_sti, &_live, &_ld, &_ldi, &_live, &_aff}
+	{&o_live, &o_ld, &o_st, &o_add, &o_add, &o_and, &o_and,
+		&o_and, &o_live, &o_ldi, &o_sti, &o_live, &o_ld,
+		&o_ldi, &o_live, &o_aff}
 };
 
-t_op_types get_o_types(void)
+t_op_types	get_o_types(void)
 {
-	return (op_type);
+	return (g_op_type);
 }
 
-int	skip_ws(char *line)
+int			skip_ws(char *line)
 {
 	int i;
 
 	i = 0;
-	while (line[i] == ' '
-			|| line[i] == '\t'
-			|| line[i] == '\v'
-			// || line[i] == '\n'
-			)
-			i++;
+	while (line[i] == ' ' || line[i] == '\t' || line[i] == '\v')
+		i++;
 	return (i);
 }
 
-int		is_label(char *s)
+int			is_label(char *s)
 {
 	int i;
 
@@ -87,7 +83,7 @@ int		is_label(char *s)
 	return (0);
 }
 
-void	free2d(char ***s)
+void		free2d(char ***s)
 {
 	int i;
 
@@ -98,101 +94,4 @@ void	free2d(char ***s)
 		i++;
 	}
 	free(*s);
-}
-
-int		count_int(int n)
-{
-	int i;
-
-	i = 0;
-	while (n != 0)
-	{
-		n /= 10;
-		i++;
-	}
-	return (i);
-}
-
-int				is_num(char *s)
-{
-	int i;
-
-	i = -1;
-	while (s[++i])
-		if (ft_isdigit(s[i]) == 0)
-			return (0);
-	return (1);
-}
-
-int				is_num_neg(char *s)
-{
-	int i;
-
-	i = -1;
-	if (s[0] == '-')
-		i++;
-	while (s[++i])
-		if (ft_isdigit(s[i]) == 0)
-			return (0);
-	return (1);
-}
-
-
-int	calc_sz(char *argc, int dirsz)
-{
-	int sz;
-
-	sz = 1;
-	if (argc[0] == T_REG)
-		sz += 1;
-	else if (argc[0] == T_DIR)
-		sz += dirsz;
-	else if (argc[0] == T_IND)
-		sz += 2;
-	
-	if (argc[1] == T_REG)
-		sz += 1;
-	else if (argc[1] == T_DIR)
-		sz += dirsz;
-	else if (argc[1] == T_IND)
-		sz += 2;
-	
-	if (argc[2] == T_REG)
-		sz += 1;
-	else if (argc[2] == T_DIR)
-		sz += dirsz;
-	else if (argc[2] == T_IND)
-		sz += 2;
-	return (sz);
-}
-
-
-void	get_argc_types(t_token **op, char **sp)
-{
-	if (sp[1] && sp[1][0] == 'r')
-		(*op)->argc[0] = T_REG;
-	else if (sp[1] && sp[1][0] == '%')
-		(*op)->argc[0] = T_DIR;
-	else if (sp[1] && (is_num_neg(sp[1]) || sp[1][0] == ':'))
-		(*op)->argc[0] = T_IND;
-	else
-		(*op)->argc[0] = 0;
-
-	if (sp[2] && sp[2][0] == 'r')
-		(*op)->argc[1] = T_REG;
-	else if (sp[2] && sp[2][0] == '%')
-		(*op)->argc[1] = T_DIR;
-	else if (sp[2] && (is_num_neg(sp[2]) || sp[2][0] == ':'))
-		(*op)->argc[1] = T_IND;
-	else
-		(*op)->argc[1] = 0;
-		
-	if (sp[3] && sp[3][0] == 'r')
-		(*op)->argc[2] = T_REG;
-	else if (sp[3] && sp[3][0] == '%')
-		(*op)->argc[2] = T_DIR;
-	else if (sp[3] && (is_num_neg(sp[3]) || sp[3][0] == ':'))
-		(*op)->argc[2] = T_IND;
-	else
-		(*op)->argc[2] = 0;
 }

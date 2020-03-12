@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 14:52:15 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/10 12:08:18 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/12 15:01:32 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int			calc_encode(char *arg1, char *arg2, char *arg3)
 	first_arg(&bytes, arg2, 2);
 	first_arg(&bytes, arg3, 4);
 	first_arg(&bytes, NULL, 6);
-	// ft_printf(" %s ", bytes);
 	encode = ft_atoi_base(bytes, 2);
 	ft_strdel(&bytes);
 	return (encode);

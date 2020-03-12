@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 09:03:28 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/12 12:02:44 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/12 15:34:52 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef	struct		s_lines
 }					t_lines;
 
 typedef struct		s_op
-{	
+{
 	char			*name;
 	char			binary;
 	char			arg[3];
@@ -45,7 +45,7 @@ typedef struct		s_op
 	int				tdir_sz;
 }					t_op;
 
-typedef struct 		s_token
+typedef struct		s_token
 {
 	int				type;
 	char			*name;
@@ -79,30 +79,28 @@ typedef struct		s_ass_env
 
 typedef struct		s_op_types
 {
-	int 			opss[16];
+	int				opss[16];
 	int				(*t[16])(t_token **op, char **sp);
 }					t_op_types;
 
 t_op_types			get_o_types(void);
-int					_live(t_token **op, char **sp);
-int					_ld(t_token **op, char **sp);
-int					_st(t_token **op, char **sp);
-int					_add(t_token **op, char **sp);
-int					_and(t_token **op, char **sp);
-int					_zjmp(t_token **op, char **sp);
-int					_ldi(t_token **op, char **sp);
-int					_sti(t_token **op, char **sp);
-int					_fork(t_token **op, char **sp);
-int					_lld(t_token **op, char **sp);
-int					_lldi(t_token **op, char **sp);
-int					_lfork(t_token **op, char **sp);
-int					_aff(t_token **op, char **sp);
-
+int					o_live(t_token **op, char **sp);
+int					o_ld(t_token **op, char **sp);
+int					o_st(t_token **op, char **sp);
+int					o_add(t_token **op, char **sp);
+int					o_and(t_token **op, char **sp);
+int					o_zjmp(t_token **op, char **sp);
+int					o_ldi(t_token **op, char **sp);
+int					o_sti(t_token **op, char **sp);
+int					o_fork(t_token **op, char **sp);
+int					o_lld(t_token **op, char **sp);
+int					o_lldi(t_token **op, char **sp);
+int					o_lfork(t_token **op, char **sp);
+int					o_aff(t_token **op, char **sp);
 
 void				fill_args(t_token **op, char **sp, int arg);
-
 int					assembler(char *fn, t_ass_env *ass);
-int 				get_lines(char *filename, t_ass_env *env);
+int					get_lines(char *filename, t_ass_env *env);
 char				**ft_split_whitespaces(char *str);
 int					skip_ws(char *line);
 int					is_label(char *s);
@@ -126,26 +124,26 @@ void				print_content(t_token *ttoken, char *fn, int sz);
 void				print_exec_code(int fd, t_token *tk);
 
 int					count_int(int n);
-char		*renamefn(char *s);
+char				*renamefn(char *s);
 
-void	print_live(t_token *token, int fd);
-void	print_ld(t_token *token, int fd);
-void	print_st(t_token *token, int fd);
-void	print_add_sub(t_token *token, int fd);
-void	print_and_xor(t_token *token, int fd);
-void	print_sti(t_token *token, int fd);
-void	print_ldi(t_token *token, int fd);
+void				print_live(t_token *token, int fd);
+void				print_ld(t_token *token, int fd);
+void				print_st(t_token *token, int fd);
+void				print_add_sub(t_token *token, int fd);
+void				print_and_xor(t_token *token, int fd);
+void				print_sti(t_token *token, int fd);
+void				print_ldi(t_token *token, int fd);
 
-int				is_num(char *s);
-int				is_num_neg(char *s);
+int					is_num(char *s);
+int					is_num_neg(char *s);
 
-int		calc_encode(char *arg1, char *arg2, char *arg3);
-int		calc_sz(char *argc, int dirsz);
-int		calc_exec_code_sz(t_token *token);
+int					calc_encode(char *arg1, char *arg2, char *arg3);
+int					calc_sz(char *argc, int dirsz);
+int					calc_exec_code_sz(t_token *token);
 
-void	get_argc_types(t_token **op, char **sp);
+void				get_argc_types(t_token **op, char **sp);
 
-int		get_labels(t_token **token);
+int					get_labels(t_token **token);
 
 void				free_lines(t_lines **lines);
 void				free_token(t_token **token);

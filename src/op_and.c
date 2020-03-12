@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 14:56:34 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/11 20:22:55 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/12 15:39:52 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,20 @@
 
 int		check_and_err(char **sp)
 {
-	if (
-		!sp[0] || !sp[1] || !sp[2] || !sp[3] ||
-		(sp[4] && sp[4][0] != ';' && sp[4][0] != '#') ||		
-		
+	if (!sp[0] || !sp[1] || !sp[2] || !sp[3] ||
+		(sp[4] && sp[4][0] != ';' && sp[4][0] != '#') ||
 		(sp[1] && sp[1][0] != 'R' && sp[1][0] != 'r' && sp[1][0] != '%' &&
 		sp[1][0] != ':' && !is_num_neg(sp[1])) ||
 		(sp[1] && (sp[1][0] == 'r' || sp[1][0] == 'R') && !is_num(sp[1] + 1)) ||
-		(sp[1] && (sp[1][0] == '%' && sp[1][1] != ':') && !is_num_neg(sp[1] + 1)) ||
-
+		(sp[1] && (sp[1][0] == '%' && sp[1][1] != ':') &&
+		!is_num_neg(sp[1] + 1)) ||
 		(sp[2] && sp[2][0] != 'R' && sp[2][0] != 'r' && sp[2][0] != '%' &&
 		sp[2][0] != ':' && !is_num(sp[2])) ||
 		(sp[2] && (sp[2][0] == 'r' || sp[2][0] == 'R') && !is_num(sp[2] + 1)) ||
-		(sp[2] && (sp[2][0] == '%' && sp[2][1] != ':') && !is_num_neg(sp[2] + 1)) ||
-		
+		(sp[2] && (sp[2][0] == '%' && sp[2][1] != ':') &&
+		!is_num_neg(sp[2] + 1)) ||
 		(sp[3] && sp[3][0] != 'R' && sp[3][0] != 'r') ||
-		(sp[3] && (sp[3][0] == 'r' || sp[3][0] == 'R') && !is_num(sp[3] + 1))
-		)
+		(sp[3] && (sp[3][0] == 'r' || sp[3][0] == 'R') && !is_num(sp[3] + 1)))
 		return (0);
 	return (1);
 }
@@ -45,7 +42,7 @@ void	fill_args(t_token **op, char **sp, int arg)
 			(*op)->args[arg] = ft_atoi(sp[arg + 1] + 1);
 	}
 	else if (sp[arg + 1][0] == 'r')
-			(*op)->args[arg] = ft_atoi(sp[arg + 1] + 1);
+		(*op)->args[arg] = ft_atoi(sp[arg + 1] + 1);
 	else
 	{
 		if (sp[arg + 1][0] == ':' && ((*op)->args[arg] = 2748))
@@ -55,7 +52,7 @@ void	fill_args(t_token **op, char **sp, int arg)
 	}
 }
 
-int		_and(t_token **op, char **sp)
+int		o_and(t_token **op, char **sp)
 {
 	if (!check_and_err(sp))
 		return (0);
@@ -64,14 +61,12 @@ int		_and(t_token **op, char **sp)
 	fill_args(op, sp, 0);
 	fill_args(op, sp, 1);
 	fill_args(op, sp, 2);
-	if (
-		((*op)->argc[0] == T_REG &&
+	if (((*op)->argc[0] == T_REG &&
 		((*op)->args[0] > REG_NUMBER || (*op)->args[0] <= 0)) ||
 		((*op)->argc[1] == T_REG &&
 		((*op)->args[1] > REG_NUMBER || (*op)->args[1] <= 0)) ||
 		((*op)->argc[2] == T_REG &&
-		((*op)->args[2] > REG_NUMBER || (*op)->args[2] <= 0))
-		)
+		((*op)->args[2] > REG_NUMBER || (*op)->args[2] <= 0)))
 		return (0);
 	(*op)->args[2] = ft_atoi(sp[3] + 1);
 	(*op)->sz = calc_sz((*op)->argc, (*op)->tdir_sz) + 1;
@@ -80,24 +75,24 @@ int		_and(t_token **op, char **sp)
 
 void	and_misc(char *s, t_token *token, int fd, int t)
 {
-	int i;
-	int	max;
+	int		i;
+	int		max;
 	char	*a;
-	int	maxi;
-	
+	int		maxi;
+
 	maxi = 2;
 	maxi = (token->argc[t] == T_DIR || token->argc[t] == T_IND) ? 4 : maxi;
 	maxi = (token->argc[t] == T_DIR && token->tdir_sz == 4) ? 8 : maxi;
 	max = ft_strlen(s);
 	i = (max % 2 != 0) ? 1 : 0;
-		while (i < maxi - max)
-		{
-			ft_putchar_fd(00, fd);
-			i += 2;
-		}
+	while (i < maxi - max)
+	{
+		ft_putchar_fd(00, fd);
+		i += 2;
+	}
 	maxi = (max > maxi) ? max - maxi : 0;
 	i = maxi;
-	while (i < ft_strlen(s))
+	while (i < (int)ft_strlen(s))
 	{
 		a = (i == maxi && max % 2 != 0) ?
 			ft_strsub(s, i, 1) : ft_strsub(s, i, 2);
@@ -110,9 +105,6 @@ void	and_misc(char *s, t_token *token, int fd, int t)
 void	print_and_xor(t_token *token, int fd)
 {
 	char	*s;
-	char	*a;
-	int i;
-	int	max;
 
 	s = itoa_base(token->code, 16);
 	ft_putchar_fd(ft_atoi_base(s, 16), fd);

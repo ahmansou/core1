@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 15:43:15 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/11 15:20:34 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/12 15:40:54 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int		check_sti_err(char **sp)
 	return (1);
 }
 
-int		_sti(t_token **op, char **sp)
+int		o_sti(t_token **op, char **sp)
 {
 	if (!check_sti_err(sp))
 		return (0);
@@ -74,7 +74,7 @@ static void	sti_misc(char *s, t_token *token, int fd, int t)
 		}
 	maxi = (max > maxi) ? max - maxi : 0;
 	i = maxi;
-	while (i < ft_strlen(s))
+	while (i < (int)ft_strlen(s))
 	{
 		a = (i == maxi && max % 2 != 0) ? ft_strsub(s, i, 1) : ft_strsub(s, i, 2);
 		ft_putchar_fd(ft_atoi_base(a, 16), fd);
@@ -86,9 +86,6 @@ static void	sti_misc(char *s, t_token *token, int fd, int t)
 void	print_sti(t_token *token, int fd)
 {
 	char	*s;
-	char	*a;
-	int i;
-	int	max;
 
 	s = itoa_base(token->code, 16);
 	ft_putchar_fd(ft_atoi_base(s, 16), fd);

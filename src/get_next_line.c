@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/28 21:20:19 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/12 11:39:50 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/12 15:02:39 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static int	insert_line(char *line, t_ass_env *env)
 	return (1);
 }
 
-int 		get_lines(char *filename, t_ass_env *env)
+int			get_lines(char *filename, t_ass_env *env)
 {
 	char	*line;
 	int		sz;

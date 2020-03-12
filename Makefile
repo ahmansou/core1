@@ -6,7 +6,7 @@
 #    By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/25 14:48:59 by ahmansou          #+#    #+#              #
-#    Updated: 2020/03/12 11:40:29 by ahmansou         ###   ########.fr        #
+#    Updated: 2020/03/12 15:35:31 by ahmansou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,8 +22,8 @@ SRCS =  src/ass.c\
 		src/ops.c\
 		src/ops_misc.c\
 		src/misc.c\
+		src/misc2.c\
 		src/print_content.c\
-		src/print_ops.c\
 		src/encode_calc.c\
 		src/op_live.c\
 		src/op_ld.c\
@@ -32,21 +32,20 @@ SRCS =  src/ass.c\
 		src/op_and.c\
 		src/op_sti.c\
 		src/op_ldi.c\
-		src/op_lld.c\
 		src/op_aff.c\
 		src/atoi_base.c
 
 OBJS = $(SRCS:.c=.o) 
 
-FLG = -g -Wall -Werror -Wextra
+FLG = -Wall -Werror -Wextra
 
 $(NAME): $(OBJS)
 	make -C ../libft
 	make -C ../ft_printf
 	gcc -g -o $(NAME) $(FLG) $(OBJS) ../libft/libft.a ../ft_printf/libftprintf.a
 
-# $(OBJS): %.o:%.c
-# 	gcc -c $(FLG) $^ -o $@
+$(OBJS): %.o:%.c
+	gcc -c $(FLG) $^ -o $@
 
 clean:
 	make clean -C ../libft

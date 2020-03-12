@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 11:36:22 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/12 12:00:09 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/12 15:37:09 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void		print_magic_header(int fd)
 void		print_name_comnt(int fd, char *name, int max)
 {
 	int		i;
-	int		k;
 	char	*s;
 
 	i = -1;
@@ -61,7 +60,6 @@ void		print_null(int fd)
 void		print_exec_code(int fd, t_token *tk)
 {
 	t_token	*ttoken;
-	int		i;
 
 	if (!(ttoken = tk))
 		ft_printf("nah");

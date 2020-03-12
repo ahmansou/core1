@@ -6,13 +6,13 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 12:35:47 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/11 15:20:26 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/12 15:39:15 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ass.h"
 
-int		_st(t_token **op, char **sp)
+int		o_st(t_token **op, char **sp)
 {
 	if (!sp[0] || !sp[1] || !sp[2] ||
 		(sp[3] && sp[3][0] != ';' && sp[3][0] != '#') ||
@@ -60,7 +60,7 @@ void	st_misc(char *s, t_token *token, int fd, int t)
 	}
 	maxi = (max > maxi) ? max - maxi : 0;
 	i = maxi;
-	while (i < ft_strlen(s))
+	while (i < (int)ft_strlen(s))
 	{
 		a = (i == maxi && max % 2 != 0) ? ft_strsub(s, i, 1) : ft_strsub(s, i, 2);
 		ft_putchar_fd(ft_atoi_base(a, 16), fd);
@@ -72,9 +72,6 @@ void	st_misc(char *s, t_token *token, int fd, int t)
 void	print_st(t_token *token, int fd)
 {
 	char	*s;
-	char	*a;
-	int i;
-	int	max;
 
 	s = itoa_base(token->code, 16);
 	ft_putchar_fd(ft_atoi_base(s, 16), fd);
