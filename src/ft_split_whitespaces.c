@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 16:45:49 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/05 11:28:26 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/12 11:18:39 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,15 @@ static int	word_count(char *str)
 
 	i = 0;
 	wc = 0;
-	is_word = 0;
-	if (!str)
+	if (!(is_word = 0) && !str)
 		return (0);
 	while (str[i])
 	{
-		while (str[i] != '\t' && str[i] != ' ' && str[i] != '\n' && str[i] != SEPARATOR_CHAR && str[i])
-		{
+		while (str[i] != '\t' && str[i] != ' ' && str[i] != '\n' &&
+			str[i] != SEPARATOR_CHAR && str[i] && (is_word = 1))
 			i++;
-			is_word = 1;
-		}
-		if (str[i] == '\t' || str[i] == ' ' || str[i] == '\n' || str[i] == '\0' ||
-			str[i] == SEPARATOR_CHAR)
+		if (str[i] == '\t' || str[i] == ' ' || str[i] == '\n' ||
+			str[i] == '\0' || str[i] == SEPARATOR_CHAR)
 		{
 			if (is_word == 1)
 				wc++;
@@ -47,12 +44,21 @@ static int	wlen(char *str, int i)
 	int lc;
 
 	lc = 0;
-	while (str[i] != '\t' && str[i] != ' ' && str[i] != '\n' && str[i] != SEPARATOR_CHAR && str[i])
+	while (str[i] != '\t' && str[i] != ' ' && str[i] != '\n' &&
+		str[i] != SEPARATOR_CHAR && str[i])
 	{
 		lc++;
 		i++;
 	}
 	return (lc);
+}
+
+static int	skipws(char *str, int i)
+{
+	while ((str[i] == '\t' || str[i] == ' ' || str[i] == '\n' ||
+		str[i] == SEPARATOR_CHAR) && str[i])
+		i++;
+	return (i);
 }
 
 char		**ft_split_whitespaces(char *str)
@@ -68,8 +74,7 @@ char		**ft_split_whitespaces(char *str)
 		return (NULL);
 	while (str[i])
 	{
-		while ((str[i] == '\t' || str[i] == ' ' || str[i] == '\n' || str[i] == SEPARATOR_CHAR) && str[i])
-			i++;
+		i = skipws(str, i);
 		if (str[i])
 		{
 			k = 0;

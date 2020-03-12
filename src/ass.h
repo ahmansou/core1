@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 09:03:28 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/10 17:04:15 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/12 12:02:44 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ int					ft_atoi_base(char *nb, int base);
 void				print_magic_header(int fd);
 void				print_name_comnt(int fd, char *name, int max);
 void				print_null(int fd);
-void				print_exec_code_size(int fd, int sz);
+int					print_exec_code_size(int fd, int sz);
 void				print_content(t_token *ttoken, char *fn, int sz);
 void				print_exec_code(int fd, t_token *tk);
 
@@ -146,5 +146,9 @@ int		calc_exec_code_sz(t_token *token);
 void	get_argc_types(t_token **op, char **sp);
 
 int		get_labels(t_token **token);
+
+void				free_lines(t_lines **lines);
+void				free_token(t_token **token);
+void				free_name_cmnt(t_ch *ch);
 
 #endif

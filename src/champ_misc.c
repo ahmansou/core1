@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 09:51:41 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/05 12:28:41 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/12 12:27:45 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,55 @@
 
 int		get_champ_name(char *line, t_ass_env *ass)
 {
+	char	*tmp;
+	
 	line = ft_strtrim(line);
+	tmp = line;
 	if (!line || line[0] != '"' || line[ft_strlen(line) - 1] != '"')
+	{
+		ft_strdel(&tmp);
 		return (0);
+	}
 	line++;
 	if (ft_strlen(line) - 1 > PROG_NAME_LENGTH)
+	{
+		ft_strdel(&tmp);
 		return (0);
+	}
 	ass->champ.prog_name = ft_strsub(line, 0, ft_strlen(line) - 1);
 	if (!add_token(ass, new_token(ass->champ.prog_name, 1)))
+	{
+		ft_strdel(&tmp);
 		return (0);
+	}
+	ft_strdel(&tmp);
 	return (1);
 }
 
 int		get_champ_cmnt(char *line, t_ass_env *ass)
 {
+	char	*tmp;
+	
 	line = ft_strtrim(line);
+	tmp = line;
 	if (!line || line[0] != '"' || line[ft_strlen(line) - 1] != '"')
+	{
+		ft_strdel(&tmp);
 		return (0);
+	}
 	line++;
 	if (ft_strlen(line) - 1 > PROG_NAME_LENGTH)
+	{
+		ft_strdel(&tmp);
 		return (0);
+	}
 	ass->champ.prog_cmnt = ft_strsub(line, 0, ft_strlen(line) - 1);
 	if (!add_token(ass, new_token(ass->champ.prog_cmnt, 2)))
+	{
+		ft_strdel(&tmp);
 		return (0);
+	}
+	ft_strdel(&tmp);
 	return (1);
 }
 

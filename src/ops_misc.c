@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 10:33:46 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/11 13:05:43 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/12 12:00:59 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		calc_exec_code_sz(t_token *token)
 	return (i);
 }
 
-void	print_exec_code_size(int fd, int sz)
+int		print_exec_code_size(int fd, int sz)
 {
 	int i;
 	int	max;
@@ -44,8 +44,6 @@ void	print_exec_code_size(int fd, int sz)
 	while (i < maxi - max)
 	{
 		ft_putchar_fd(00, fd);
-		ft_putchar_fd('0', 1);
-		ft_putchar_fd('0', 1);
 		i += 2;
 	}
 	i = 0;
@@ -53,10 +51,11 @@ void	print_exec_code_size(int fd, int sz)
 	{
 		a = (i == 0 && max % 2 != 0) ? ft_strsub(s, i, 1) : ft_strsub(s, i, 2);
 		ft_putchar_fd(ft_atoi_base(a, 16), fd);
-		ft_printf("%s", a);
 		ft_strdel(&a);
 		i += (i == 0 && max % 2 != 0) ? 1 : 2;
 	}
+	ft_strdel(&s);
+	return (1);
 }
 
 int		look_forewards(t_token *token, char *label, int i)
