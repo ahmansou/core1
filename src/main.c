@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 09:03:32 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/12 14:59:25 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/12 16:04:31 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,30 @@ void		find_prevs(t_token **token)
 	}
 }
 
+static int	check_name(char *name)
+{
+	int max;
+
+	max = ft_strlen(name);
+	if (!name || !name[max - 1] || !name[max - 2] ||
+		(name[max - 2] && name[max -2] != '.') ||
+		(name[max - 1] && name[max -1] != 's')
+		)
+		return (0);
+	return (1);
+}
+
 int			main(int ac, char **av)
 {
 	t_ass_env	ass;
 	int			i;
 
 	init_env(&ass);
+	if (ac <= 1 || !check_name(av[1]))
+	{
+		ft_printf("SRC FILE ERROR\n");
+		return (0);
+	}
 	if (ac > 1 && !assembler(av[1], &ass))
 	{
 		ft_printf("ERROR\n");
