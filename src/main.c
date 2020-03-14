@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 09:03:32 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/13 11:45:12 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/14 11:30:46 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,8 @@ static int	check_name(char *name)
 
 	max = ft_strlen(name);
 	if (!name || !name[max - 1] || !name[max - 2] ||
-		(name[max - 2] && name[max -2] != '.') ||
-		(name[max - 1] && name[max -1] != 's')
-		)
+		(name[max - 2] && name[max - 2] != '.') ||
+		(name[max - 1] && name[max - 1] != 's'))
 		return (0);
 	return (1);
 }

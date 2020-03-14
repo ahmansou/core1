@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 12:35:47 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/12 15:39:15 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/14 11:28:25 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,12 @@ int		o_st(t_token **op, char **sp)
 	(*op)->args[0] = ft_atoi(sp[1] + 1);
 	if ((*op)->args[0] > REG_NUMBER || (*op)->args[0] < 0)
 		return (0);
-	
 	if (sp[2][0] == ':' && ((*op)->args[1] = 2748))
 		(*op)->labels[1] = ft_strdup(sp[2] + 1);
 	else if (is_num_neg(sp[2]))
 		(*op)->args[1] = ft_atoi(sp[2]);
 	else if (sp[2][0] == 'r' || sp[2][0] == 'R')
 		(*op)->args[1] = ft_atoi(sp[2] + 1);
-		
 	get_argc_types(op, sp);
 	if (((*op)->argc[0] == T_REG &&
 		((*op)->args[0] > REG_NUMBER || (*op)->args[0] <= 0)) ||
@@ -44,11 +42,11 @@ int		o_st(t_token **op, char **sp)
 
 void	st_misc(char *s, t_token *token, int fd, int t)
 {
-	int i;
-	int	max;
+	int		i;
+	int		max;
 	char	*a;
-	int	maxi;
-	
+	int		maxi;
+
 	maxi = 2;
 	maxi = (token->argc[t] == T_IND) ? 4 : maxi;
 	max = ft_strlen(s);
@@ -62,7 +60,8 @@ void	st_misc(char *s, t_token *token, int fd, int t)
 	i = maxi;
 	while (i < (int)ft_strlen(s))
 	{
-		a = (i == maxi && max % 2 != 0) ? ft_strsub(s, i, 1) : ft_strsub(s, i, 2);
+		a = (i == maxi && max % 2 != 0) ?
+			ft_strsub(s, i, 1) : ft_strsub(s, i, 2);
 		ft_putchar_fd(ft_atoi_base(a, 16), fd);
 		ft_strdel(&a);
 		i += (i == maxi && max % 2 != 0) ? 1 : 2;
