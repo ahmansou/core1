@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 09:03:32 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/12 16:04:31 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/13 11:45:12 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,29 @@ static int	check_name(char *name)
 	return (1);
 }
 
+void		fix_name_cmnt(t_token **token)
+{
+	t_token *ttoken;
+	char	*tname;
+	int		ttype;
+
+	ttoken = *token;
+	if (!ttoken)
+		return ;
+	if (ttoken->type == 2)
+	{
+		if (ttoken->next && ttoken->next->type == 1)
+		{
+			tname = ttoken->name;
+			ttype = ttoken->type;
+			ttoken->name = ttoken->next->name;
+			ttoken->type = ttoken->next->type;
+			ttoken->next->name = tname;
+			ttoken->next->type = ttype;
+		}
+	}
+}
+
 int			main(int ac, char **av)
 {
 	t_ass_env	ass;
@@ -90,6 +113,7 @@ int			main(int ac, char **av)
 		free_token(&(ass.tokens));
 		return (0);
 	}
+	fix_name_cmnt(&(ass.tokens));
 	ass.sz = 0;
 	i = 0;
 	find_prevs(&(ass.tokens));
