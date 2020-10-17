@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   atoi_base.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahmansou <ahmansou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 11:57:27 by jbouazao          #+#    #+#             */
-/*   Updated: 2020/03/05 13:58:22 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/10/17 15:19:00 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*itoa_basecap(unsigned long long nbr, int base)
+char	*itoa_base(unsigned long long nbr, int base)
 {
 	char				*str;
 	unsigned long long	temp;
