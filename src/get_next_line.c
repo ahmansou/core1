@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/28 21:20:19 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/10/17 18:12:28 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/10/17 18:46:38 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,9 @@ static int	get_next_line(const int fd, char **line, int *has_bslash)
 	*has_bslash = 0;
 	while ((size = read(fd, buf, 1)) > 0)
 	{
+		*has_bslash = (*buf == '\n' || *buf == '\t') ? 1 : 0;
 		if (*buf == '\n')
-		{
-			*has_bslash = 1;
 			break ;
-		}
 		str = ft_join(str, buf);
 	}
 	if (!*buf)
