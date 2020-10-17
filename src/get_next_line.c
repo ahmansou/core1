@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahmansou <ahmansou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/28 21:20:19 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/12 15:02:39 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/10/17 18:12:28 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char	*ft_join(char *str, const char *buf)
 	return (res);
 }
 
-static int	get_next_line(const int fd, char **line)
+static int	get_next_line(const int fd, char **line, int *has_bslash)
 {
 	char		*str;
 	char		buf[2];
@@ -31,10 +31,14 @@ static int	get_next_line(const int fd, char **line)
 		return (-1);
 	ft_bzero(buf, 2);
 	str = ft_strnew(0);
+	*has_bslash = 0;
 	while ((size = read(fd, buf, 1)) > 0)
 	{
 		if (*buf == '\n')
+		{
+			*has_bslash = 1;
 			break ;
+		}
 		str = ft_join(str, buf);
 	}
 	if (!*buf)
@@ -73,10 +77,11 @@ int			get_lines(char *filename, t_ass_env *env)
 	char	*line;
 	int		sz;
 	int		fd;
+	int		has_bslash;
 
 	if ((fd = open(filename, O_RDONLY)) < 0)
 		return (0);
-	while ((sz = get_next_line(fd, &line)))
+	while ((sz = get_next_line(fd, &line, &has_bslash)))
 	{
 		if (!insert_line(line, env))
 		{
@@ -84,6 +89,8 @@ int			get_lines(char *filename, t_ass_env *env)
 			return (0);
 		}
 		ft_strdel(&line);
+		if (!has_bslash)
+			return (0);
 	}
 	if (sz < 0)
 		return (0);
