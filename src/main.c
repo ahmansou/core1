@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahmansou <ahmansou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 09:03:32 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/14 11:30:46 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/10/17 16:17:44 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ass.h"
-
-static void	init_env(t_ass_env *ass)
-{
-	ass->champ.prog_name = NULL;
-	ass->champ.prog_cmnt = NULL;
-	ass->tokens = NULL;
-	ass->op = NULL;
-	ass->sz = 0;
-}
 
 char		*renamefn(char *s)
 {
@@ -105,14 +96,14 @@ int			main(int ac, char **av)
 		ft_printf("SRC FILE ERROR\n");
 		return (0);
 	}
-	if (ac > 1 && !assembler(av[1], &ass))
+	if ((ac > 1 && !assembler(av[1], &ass)) || check_if_no_op(ass) == 0)
 	{
 		ft_printf("ERROR\n");
 		free_lines(&(ass.lines));
 		free_token(&(ass.tokens));
 		return (0);
 	}
-	fix_name_cmnt(&(ass.tokens));
+	fix_name_cmnt(&(ass.tokens));	
 	ass.sz = 0;
 	i = 0;
 	find_prevs(&(ass.tokens));

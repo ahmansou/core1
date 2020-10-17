@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ass.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahmansou <ahmansou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 09:03:28 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/12 16:00:11 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/10/17 16:18:08 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,5 +148,8 @@ int					get_labels(t_token **token);
 void				free_lines(t_lines **lines);
 void				free_token(t_token **token);
 void				free_name_cmnt(t_ch *ch);
+
+int					check_if_no_op(t_ass_env ass);
+void				init_env(t_ass_env *ass);
 
 #endif

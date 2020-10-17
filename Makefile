@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+         #
+#    By: ahmansou <ahmansou@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/25 14:48:59 by ahmansou          #+#    #+#              #
-#    Updated: 2020/03/12 15:35:31 by ahmansou         ###   ########.fr        #
+#    Updated: 2020/10/17 16:02:21 by ahmansou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRCS =  src/ass.c\
 		src/ops_misc.c\
 		src/misc.c\
 		src/misc2.c\
+		src/misc3.c\
 		src/print_content.c\
 		src/encode_calc.c\
 		src/op_live.c\
@@ -40,21 +41,21 @@ OBJS = $(SRCS:.c=.o)
 FLG = -Wall -Werror -Wextra
 
 $(NAME): $(OBJS)
-	make -C ../libft
-	make -C ../ft_printf
-	gcc -g -o $(NAME) $(FLG) $(OBJS) ../libft/libft.a ../ft_printf/libftprintf.a
+	make -C libft
+	make -C ft_printf
+	gcc -g -o $(NAME) $(FLG) $(OBJS) libft/libft.a ft_printf/libftprintf.a
 
 $(OBJS): %.o:%.c
 	gcc -c $(FLG) $^ -o $@
 
 clean:
-	make clean -C ../libft
-	make clean -C ../ft_printf
+	make clean -C libft
+	make clean -C ft_printf
 	rm -f $(OBJS)
 
 fclean: clean
-	make fclean -C ../libft
-	make fclean -C ../ft_printf
+	make fclean -C libft
+	make fclean -C ft_printf
 	rm -f $(NAME) 
 
 re: fclean all
