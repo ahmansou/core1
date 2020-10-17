@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   champ_misc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahmansou <ahmansou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 09:51:41 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/12 15:01:14 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/10/17 18:44:26 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ass.h"
+
+int		chk_nm(char *line)
+{
+	unsigned long i;
+
+	i = 0;
+	while (line[i] && i < ft_strlen(line) - 1)
+	{
+		if (line[i] == '"')
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 int		get_champ_name(char *line, t_ass_env *ass)
 {
@@ -18,7 +32,8 @@ int		get_champ_name(char *line, t_ass_env *ass)
 
 	line = ft_strtrim(line);
 	tmp = line;
-	if (!line || line[0] != '"' || line[ft_strlen(line) - 1] != '"')
+	if (!line || line[0] != '"' || line[ft_strlen(line) - 1] != '"' ||
+		!chk_nm(line + 1))
 	{
 		ft_strdel(&tmp);
 		return (0);
@@ -45,7 +60,8 @@ int		get_champ_cmnt(char *line, t_ass_env *ass)
 
 	line = ft_strtrim(line);
 	tmp = line;
-	if (!line || line[0] != '"' || line[ft_strlen(line) - 1] != '"')
+	if (!line || line[0] != '"' || line[ft_strlen(line) - 1] != '"' ||
+		!chk_nm(line + 1))
 	{
 		ft_strdel(&tmp);
 		return (0);
