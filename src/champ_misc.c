@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 09:51:41 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/10/17 18:44:26 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/10/17 18:45:35 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int		get_champ_cmnt(char *line, t_ass_env *ass)
 		return (0);
 	}
 	line++;
-	if (ft_strlen(line) - 1 > PROG_NAME_LENGTH)
+	if (ft_strlen(line) - 1 > COMMENT_LENGTH)
 	{
 		ft_strdel(&tmp);
 		return (0);
