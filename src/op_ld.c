@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   op_ld.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmansou <ahmansou@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 11:38:37 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/10/19 10:55:34 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/10/19 11:20:04 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ass.h"
 
-static int valid_ld(char ***sp)
+static int	valid_ld(char ***sp)
 {
 	remove_cmnt(sp, 2);
 	if (!(*sp)[0] || !(*sp)[1] || !(*sp)[2] ||
@@ -21,7 +21,7 @@ static int valid_ld(char ***sp)
 		((*sp)[1] && (*sp)[1][0] != '%' && (*sp)[1][0] != ':' &&
 		!is_num_neg((*sp)[1])) ||
 		((*sp)[1] && (*sp)[1][0] == '%' && (*sp)[1][1] != ':' &&
-		 !is_num_neg((*sp)[1] + 1)) ||
+		!is_num_neg((*sp)[1] + 1)) ||
 		((*sp)[2] && (*sp)[2][0] != 'r' && (*sp)[2][0] != 'R') ||
 		((*sp)[2] && ((*sp)[2][0] == 'r' || (*sp)[2][0] == 'R') &&
 		!is_num((*sp)[2] + 1)))
@@ -29,7 +29,7 @@ static int valid_ld(char ***sp)
 	return (1);
 }
 
-int o_ld(t_token **op, char ***sp)
+int			o_ld(t_token **op, char ***sp)
 {
 	if (!valid_ld(sp))
 		return (0);

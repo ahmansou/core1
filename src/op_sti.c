@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op_sti.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmansou <ahmansou@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 15:43:15 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/10/19 11:11:34 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/10/19 11:22:35 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,28 @@ int			has_cmnt(char *s)
 	return (0);
 }
 
-static int check_sti_err(char ***sp)
+static int	check_sti_err(char ***sp)
 {
 	remove_cmnt(sp, 3);
 	if (!(*sp)[0] || !(*sp)[1] || !(*sp)[2] || !(*sp)[3] ||
 		(has_cmnt((*sp)[3]) && (*sp)[4] && (*sp)[4][0] != ';' &&
-		 (*sp)[4][0] != '#') ||
+		(*sp)[4][0] != '#') ||
 		((*sp)[1] && (*sp)[1][0] != 'R' &&
-		 (*sp)[1][0] != 'r') ||
+		(*sp)[1][0] != 'r') ||
 		((*sp)[1] && ((*sp)[1][0] == 'r' || (*sp)[1][0] == 'R') &&
 		!is_num((*sp)[1] + 1)) ||
 		((*sp)[2] && (*sp)[2][0] != 'R' && (*sp)[2][0] != 'r' &&
-		 (*sp)[2][0] != '%' && (*sp)[2][0] != ':' && !is_num_neg((*sp)[2])) ||
+		(*sp)[2][0] != '%' && (*sp)[2][0] != ':' && !is_num_neg((*sp)[2])) ||
 		((*sp)[2] && ((*sp)[2][0] == 'r' || (*sp)[2][0] == 'R') &&
-		 !is_num((*sp)[2] + 1)) ||
+		!is_num((*sp)[2] + 1)) ||
 		((*sp)[2] && ((*sp)[2][0] == '%' && (*sp)[2][1] != ':') &&
 		!is_num_neg((*sp)[2] + 1)) ||
 		((*sp)[3] && (*sp)[3][0] != 'R' && (*sp)[3][0] != 'r' &&
-		 (*sp)[3][0] != '%') ||
+		(*sp)[3][0] != '%') ||
 		((*sp)[3] && ((*sp)[3][0] == 'r' || (*sp)[3][0] == 'R') &&
 		!is_num((*sp)[3] + 1)) ||
 		((*sp)[3] && ((*sp)[3][0] == '%' && (*sp)[3][1] != ':') &&
-		 !is_num_neg((*sp)[3] + 1)))
+		!is_num_neg((*sp)[3] + 1)))
 		return (0);
 	return (1);
 }
@@ -63,11 +63,11 @@ int			o_sti(t_token **op, char ***sp)
 	fill_args(op, (*sp), 2);
 	get_argc_types(op, (*sp));
 	if (((*op)->argc[0] == T_REG &&
-		 ((*op)->args[0] > REG_NUMBER || (*op)->args[0] <= 0)) ||
+		((*op)->args[0] > REG_NUMBER || (*op)->args[0] <= 0)) ||
 		((*op)->argc[1] == T_REG &&
-		 ((*op)->args[1] > REG_NUMBER || (*op)->args[1] <= 0)) ||
+		((*op)->args[1] > REG_NUMBER || (*op)->args[1] <= 0)) ||
 		((*op)->argc[2] == T_REG &&
-		 ((*op)->args[2] > REG_NUMBER || (*op)->args[2] <= 0)))
+		((*op)->args[2] > REG_NUMBER || (*op)->args[2] <= 0)))
 		return (0);
 	(*op)->sz = calc_sz((*op)->argc, (*op)->tdir_sz) + 1;
 	return (1);

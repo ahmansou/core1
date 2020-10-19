@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ops.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmansou <ahmansou@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 11:51:00 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/10/19 11:08:30 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/10/19 11:23:00 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ass.h"
 
-static int	return_err(char ***split, int ret)
+static int		return_err(char ***split, int ret)
 {
 	free2d(split);
 	return (ret);
 }
 
-int			init_labels(t_token **token, char *sp, t_op ops)
+int				init_labels(t_token **token, char *sp, t_op ops)
 {
 	(*token)->labels[0] = NULL;
 	(*token)->labels[1] = NULL;
@@ -59,7 +59,7 @@ static t_token	*new_op_token(char **split)
 	return (NULL);
 }
 
-int			get_op(char *line, t_ass_env *ass)
+int				get_op(char *line, t_ass_env *ass)
 {
 	char		**split;
 	int			j;
@@ -79,7 +79,7 @@ int			get_op(char *line, t_ass_env *ass)
 	return (return_err(&split, 1));
 }
 
-int			is_op(char *line)
+int				is_op(char *line)
 {
 	char		**split;
 	const t_op	*ops;

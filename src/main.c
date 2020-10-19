@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmansou <ahmansou@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 09:03:32 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/10/17 16:17:44 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/10/19 11:18:23 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int			main(int ac, char **av)
 		free_token(&(ass.tokens));
 		return (0);
 	}
-	fix_name_cmnt(&(ass.tokens));	
+	fix_name_cmnt(&(ass.tokens));
 	ass.sz = 0;
 	i = 0;
 	find_prevs(&(ass.tokens));

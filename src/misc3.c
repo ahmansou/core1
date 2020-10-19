@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   misc3.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmansou <ahmansou@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 15:59:26 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/10/19 11:11:12 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/10/19 11:17:52 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ass.h"
 
-int	check_if_no_op(t_ass_env ass)
+int		check_if_no_op(t_ass_env ass)
 {
-	t_token *crt;
+	t_token	*crt;
 	int		opf;
 	int		lablef;
-	
+
 	crt = ass.tokens;
 	opf = 0;
 	lablef = 0;
