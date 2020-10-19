@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 15:59:26 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/10/17 16:18:03 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/10/19 11:11:12 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,34 @@ void	init_env(t_ass_env *ass)
 	ass->tokens = NULL;
 	ass->op = NULL;
 	ass->sz = 0;
+}
+
+int		get_cmnt_start(char *s)
+{
+	int i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == ';' || s[i] == '#')
+			return (i);
+		i++;
+	}
+	return (i);
+}
+
+int		is_cmnt(char *s)
+{
+	if (s[0] == ';' || s[0] == '#')
+		return (1);
+	return (0);
+}
+
+void	remove_cmnt(char ***sp, int id)
+{
+	char	*tmp;
+
+	tmp = ft_strsub((*sp)[id], 0, get_cmnt_start((*sp)[id]));
+	free((*sp)[id]);
+	(*sp)[id] = tmp;
 }

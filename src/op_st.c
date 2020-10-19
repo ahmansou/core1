@@ -3,40 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   op_st.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahmansou <ahmansou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 12:35:47 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/14 11:28:25 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/10/19 11:12:09 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ass.h"
 
-int		o_st(t_token **op, char **sp)
+int		r_err(char r)
 {
-	if (!sp[0] || !sp[1] || !sp[2] ||
-		(sp[3] && sp[3][0] != ';' && sp[3][0] != '#') ||
-		(sp[1] && (sp[1][0] == 'r' || sp[1][0] == 'R') && !is_num(sp[1] + 1)) ||
-		(sp[2] && sp[2][0] != 'r' && sp[2][0] != 'R' && sp[2][0] != ':' &&
-		!is_num_neg(sp[2])))
+	return (((r != 'r') && (r != 'R')) ? 1 : 0);
+}
+
+int		o_st(t_token **op, char ***sp)
+{
+	remove_cmnt(sp, 2);
+	if (!(*sp)[0] || !(*sp)[1] || !(*sp)[2] || (has_cmnt((*sp)[2]) &&
+		(*sp)[3] && (*sp)[3][0] != ';' && (*sp)[3][0] != '#') ||
+		((*sp)[1] && ((*sp)[1][0] == 'r' || (*sp)[1][0] == 'R') &&
+		 !is_num((*sp)[1] + 1)) ||
+		((*sp)[2] && r_err((*sp)[2][0]) && (*sp)[2][0] != ':' &&
+		 !is_num_neg((*sp)[2])))
 		return (0);
-	(*op)->args[0] = ft_atoi(sp[1] + 1);
+	(*op)->args[0] = ft_atoi((*sp)[1] + 1);
 	if ((*op)->args[0] > REG_NUMBER || (*op)->args[0] < 0)
 		return (0);
-	if (sp[2][0] == ':' && ((*op)->args[1] = 2748))
-		(*op)->labels[1] = ft_strdup(sp[2] + 1);
-	else if (is_num_neg(sp[2]))
-		(*op)->args[1] = ft_atoi(sp[2]);
-	else if (sp[2][0] == 'r' || sp[2][0] == 'R')
-		(*op)->args[1] = ft_atoi(sp[2] + 1);
-	get_argc_types(op, sp);
-	if (((*op)->argc[0] == T_REG &&
-		((*op)->args[0] > REG_NUMBER || (*op)->args[0] <= 0)) ||
-		((*op)->argc[1] == T_REG &&
-		((*op)->args[1] > REG_NUMBER || (*op)->args[1] <= 0)))
+	if ((*sp)[2][0] == ':' && ((*op)->args[1] = 2748))
+		(*op)->labels[1] = ft_strdup((*sp)[2] + 1);
+	else if (is_num_neg((*sp)[2]))
+		(*op)->args[1] = ft_atoi((*sp)[2]);
+	else if ((*sp)[2][0] == 'r' || (*sp)[2][0] == 'R')
+		(*op)->args[1] = ft_atoi((*sp)[2] + 1);
+	get_argc_types(op, (*sp));
+	if (((*op)->argc[0] == T_REG && ((*op)->args[0] > REG_NUMBER ||
+		(*op)->args[0] <= 0)) || ((*op)->argc[1] == T_REG &&
+		 ((*op)->args[1] > REG_NUMBER || (*op)->args[1] <= 0)))
 		return (0);
 	(*op)->sz = calc_sz((*op)->argc, (*op)->tdir_sz) + 1;
-	(*op)->encode = calc_encode(sp[1], sp[2], NULL);
+	(*op)->encode = calc_encode((*sp)[1], (*sp)[2], NULL);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 09:03:28 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/10/17 16:18:08 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/10/19 11:11:46 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,23 +80,24 @@ typedef struct		s_ass_env
 typedef struct		s_op_types
 {
 	int				opss[16];
-	int				(*t[16])(t_token **op, char **sp);
+	int				(*t[16])(t_token **op, char ***sp);
 }					t_op_types;
 
 t_op_types			get_o_types(void);
-int					o_live(t_token **op, char **sp);
-int					o_ld(t_token **op, char **sp);
-int					o_st(t_token **op, char **sp);
-int					o_add(t_token **op, char **sp);
-int					o_and(t_token **op, char **sp);
-int					o_zjmp(t_token **op, char **sp);
-int					o_ldi(t_token **op, char **sp);
-int					o_sti(t_token **op, char **sp);
-int					o_fork(t_token **op, char **sp);
-int					o_lld(t_token **op, char **sp);
-int					o_lldi(t_token **op, char **sp);
-int					o_lfork(t_token **op, char **sp);
-int					o_aff(t_token **op, char **sp);
+int					o_live(t_token **op, char ***sp);
+int					o_ld(t_token **op, char ***sp);
+int					o_st(t_token **op, char ***sp);
+int					o_add(t_token **op, char ***sp);
+int					o_and(t_token **op, char ***sp);
+int					o_zjmp(t_token **op, char ***sp);
+int					o_ldi(t_token **op, char ***sp);
+int					o_sti(t_token **op, char ***sp);
+int					o_fork(t_token **op, char ***sp);
+int					o_lld(t_token **op, char ***sp);
+int					o_lldi(t_token **op, char ***sp);
+int					o_lfork(t_token **op, char ***sp);
+int					o_aff(t_token **op, char ***sp);
+
 
 void				fill_args(t_token **op, char **sp, int arg);
 int					assembler(char *fn, t_ass_env *ass);
@@ -151,5 +152,12 @@ void				free_name_cmnt(t_ch *ch);
 
 int					check_if_no_op(t_ass_env ass);
 void				init_env(t_ass_env *ass);
+void				remove_cmnt(char ***sp, int id);
+int					get_cmnt_start(char *s);
+int					has_cmnt(char *s);
+int					is_cmnt(char *s);
+
+int					r_err(char r);
+int					has_cmnt(char *s);
 
 #endif

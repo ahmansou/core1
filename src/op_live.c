@@ -3,31 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   op_live.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahmansou <ahmansou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 12:25:37 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/12 15:38:24 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/10/19 11:01:29 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ass.h"
 
-int			o_live(t_token **op, char **sp)
+int			o_live(t_token **op, char ***sp)
 {
-	if (!sp[0] || !sp[1] ||
-		(sp[2] && sp[2][0] != ';' && sp[2][0] != '#') ||
-		(sp[1] && (sp[1][0] == '%' && sp[1][1] != ':') &&
-		!is_num_neg(sp[1] + 1)) ||
-		(sp[1] && sp[1][0] != '%'))
+	remove_cmnt(sp, 1);
+	if (!(*sp)[0] || !(*sp)[1] ||
+		(has_cmnt((*sp)[1]) && (*sp)[2] && (*sp)[2][0] != ';' &&
+		(*sp)[2][0] != '#') ||
+		((*sp)[1] && ((*sp)[1][0] == '%' && (*sp)[1][1] != ':') &&
+		 !is_num_neg((*sp)[1] + 1)) ||
+		((*sp)[1] && (*sp)[1][0] != '%'))
 		return (0);
 	(*op)->is_encode = 0;
 	(*op)->argc[0] = T_DIR;
 	(*op)->argc[1] = 0;
 	(*op)->argc[2] = 0;
-	if (sp[1][1] == ':' && ((*op)->args[0] = 2748))
-		(*op)->labels[0] = ft_strdup(sp[1] + 2);
+	if ((*sp)[1][1] == ':' && ((*op)->args[0] = 2748))
+		(*op)->labels[0] = ft_strdup((*sp)[1] + 2);
 	else
-		(*op)->args[0] = ft_atoi(sp[1] + 1);
+		(*op)->args[0] = ft_atoi((*sp)[1] + 1);
 	(*op)->argc[0] = T_DIR;
 	(*op)->sz = 1 + (*op)->tdir_sz;
 	return (1);

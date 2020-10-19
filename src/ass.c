@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ass.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahmansou <ahmansou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 09:34:28 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/12 15:00:29 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/10/19 11:06:35 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		parser(t_lines **line, t_ass_env *ass)
 	else if ((l = is_label((*line)->line)) > 0)
 	{
 		tmp = (*line)->line + l + 1 + skip_ws((*line)->line + l + 1);
-		if (tmp && ft_strcmp(tmp, "") && !is_op(tmp))
+		if (tmp && ft_strcmp(tmp, "") && !is_op(tmp) && !is_cmnt(tmp))
 			return (0);
 		return (get_label((*line)->line, ass, l));
 	}

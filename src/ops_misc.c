@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ops_misc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahmansou <ahmansou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 10:33:46 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/12 15:36:36 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/10/19 10:47:14 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,10 @@ int		look_backwards(t_token *token, char *label, int i)
 {
 	t_token *ttoken;
 	int		byte;
+	int		found;
 
 	byte = 0;
+	found = 0;
 	ttoken = token->prev;
 	while (ttoken)
 	{
@@ -96,10 +98,12 @@ int		look_backwards(t_token *token, char *label, int i)
 		if (ttoken && ttoken->type == 3 && !ft_strcmp(ttoken->name, label))
 		{
 			token->args[i] = -1 * byte;
-			return (1);
+			found = 1;
 		}
 		ttoken = ttoken->prev;
 	}
+	if (found == 1)
+		return (1);
 	return (0);
 }
 

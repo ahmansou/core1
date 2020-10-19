@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ops.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahmansou <ahmansou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 11:51:00 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/12 15:36:18 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/10/19 11:08:30 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static t_token	*new_op_token(char **split)
 		if (!ft_strcmp(split[0], ops[i].name))
 		{
 			init_labels(&new, split[0], ops[i]);
-			if (!o_tps.t[new->code - 1](&new, split))
+			if (!o_tps.t[new->code - 1](&new, &split))
 			{
 				ft_strdel(&(new->name));
 				free(new);
