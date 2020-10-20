@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 09:03:28 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/10/19 11:16:32 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/10/20 12:26:30 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,5 +158,7 @@ int					is_cmnt(char *s);
 
 int					r_err(char r);
 int					has_cmnt(char *s);
+
+void				remove_cmnt2(char **line);
 
 #endif

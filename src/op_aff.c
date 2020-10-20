@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op_aff.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmansou <ahmansou@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 13:09:25 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/10/19 10:58:48 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/10/20 12:13:54 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int		o_aff(t_token **op, char ***sp)
 {
-	remove_cmnt(sp, 1);
+	if ((*sp)[0] && (*sp)[1])
+		remove_cmnt(sp, 1);
 	if (!(*sp)[0] || !(*sp)[1] ||
 		(has_cmnt((*sp)[1]) && (*sp)[2] && (*sp)[2][0] != ';' &&
 		(*sp)[2][0] != '#') ||

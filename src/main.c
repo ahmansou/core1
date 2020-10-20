@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 09:03:32 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/10/19 11:18:23 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/10/20 12:39:44 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int			main(int ac, char **av)
 	int			i;
 
 	init_env(&ass);
-	if (ac <= 1 || !check_name(av[1]))
+	if (ac <= 1 || ac > 2 || !check_name(av[1]))
 	{
 		ft_printf("SRC FILE ERROR\n");
 		return (0);

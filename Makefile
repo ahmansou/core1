@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ahmansou <ahmansou@student.1337.ma>        +#+  +:+       +#+         #
+#    By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/25 14:48:59 by ahmansou          #+#    #+#              #
-#    Updated: 2020/10/17 16:02:21 by ahmansou         ###   ########.fr        #
+#    Updated: 2020/10/20 12:43:34 by ahmansou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ass
+NAME = asm
 
 SRCS =  src/ass.c\
 		src/get_next_line.c\
@@ -24,6 +24,7 @@ SRCS =  src/ass.c\
 		src/misc.c\
 		src/misc2.c\
 		src/misc3.c\
+		src/misc4.c\
 		src/print_content.c\
 		src/encode_calc.c\
 		src/op_live.c\

@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 11:36:22 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/12 15:37:09 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/10/20 12:19:08 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void		print_content(t_token *ttoken, char *fn, int sz)
 
 	tk = ttoken;
 	nfn = renamefn(fn);
-	if ((fd = open(nfn, O_RDWR | O_CREAT, 0644)) < 0)
+	if ((fd = open(nfn, O_RDWR | O_TRUNC | O_CREAT, 0644)) < 0)
 	{
 		ft_printf("no can do");
 		ft_strdel(&nfn);

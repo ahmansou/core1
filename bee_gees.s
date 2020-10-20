@@ -1,6 +1,7 @@
 .name "batman"
 .comment "This city needs me"
 	
+live:
 sti	r1, %:live, %1			;change live by the right value
 # 1 1 1 2 2		7
 sti	r1, %:live2, %1			;change live by the right value

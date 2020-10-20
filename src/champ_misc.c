@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   champ_misc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmansou <ahmansou@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 09:51:41 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/10/17 18:45:35 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/10/20 12:25:01 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int		get_champ_name(char *line, t_ass_env *ass)
 {
 	char	*tmp;
 
+	remove_cmnt2(&line);
 	line = ft_strtrim(line);
 	tmp = line;
 	if (!line || line[0] != '"' || line[ft_strlen(line) - 1] != '"' ||
@@ -58,6 +59,7 @@ int		get_champ_cmnt(char *line, t_ass_env *ass)
 {
 	char	*tmp;
 
+	remove_cmnt2(&line);
 	line = ft_strtrim(line);
 	tmp = line;
 	if (!line || line[0] != '"' || line[ft_strlen(line) - 1] != '"' ||

@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 12:35:47 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/10/19 11:21:20 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/10/20 12:14:53 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ int		r_err(char r)
 
 int		o_st(t_token **op, char ***sp)
 {
-	remove_cmnt(sp, 2);
+	if ((*sp)[0] && (*sp)[1] && (*sp)[2])
+		remove_cmnt(sp, 2);
 	if (!(*sp)[0] || !(*sp)[1] || !(*sp)[2] || (has_cmnt((*sp)[2]) &&
 		(*sp)[3] && (*sp)[3][0] != ';' && (*sp)[3][0] != '#') ||
 		((*sp)[1] && ((*sp)[1][0] == 'r' || (*sp)[1][0] == 'R') &&
-		!is_num((*sp)[1] + 1)) ||
-		((*sp)[2] && r_err((*sp)[2][0]) && (*sp)[2][0] != ':' &&
-		!is_num_neg((*sp)[2])))
+		!is_num((*sp)[1] + 1)) || ((*sp)[2] && r_err((*sp)[2][0]) &&
+		(*sp)[2][0] != ':' && !is_num_neg((*sp)[2])))
 		return (0);
 	(*op)->args[0] = ft_atoi((*sp)[1] + 1);
 	if ((*op)->args[0] > REG_NUMBER || (*op)->args[0] < 0)

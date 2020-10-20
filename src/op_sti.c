@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 15:43:15 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/10/19 11:22:35 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/10/20 12:15:09 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int			has_cmnt(char *s)
 
 static int	check_sti_err(char ***sp)
 {
-	remove_cmnt(sp, 3);
+	if ((*sp)[0] && (*sp)[1] && (*sp)[2] && (*sp)[3])
+		remove_cmnt(sp, 3);
 	if (!(*sp)[0] || !(*sp)[1] || !(*sp)[2] || !(*sp)[3] ||
 		(has_cmnt((*sp)[3]) && (*sp)[4] && (*sp)[4][0] != ';' &&
 		(*sp)[4][0] != '#') ||
